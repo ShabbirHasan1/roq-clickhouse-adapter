@@ -17,13 +17,13 @@ ModifyOrder::ModifyOrder()
 
 std::string ModifyOrder::get_fields() const {
   return fmt::format(
-      "{}, "     // account
-      "{}, "     // order_id
-      "{}, "     // quantity
-      "{}, "     // price
-      "{}, "     // routing_id
-      "{}, "     // version
-      "{}, "sv,  // conditional_on_version
+      "{}, "   // account
+      "{}, "   // order_id
+      "{}, "   // quantity
+      "{}, "   // price
+      "{}, "   // routing_id
+      "{}, "   // version
+      "{}"sv,  // conditional_on_version
       account_,
       order_id_,
       quantity_,
@@ -33,7 +33,7 @@ std::string ModifyOrder::get_fields() const {
       conditional_on_version_);
 }
 
-void ModifyOrder::operator()(roq::ModifyOrder const &create_order) {
+size_t ModifyOrder::operator()(roq::ModifyOrder const &create_order) {
   account_.append(create_order.account);
   order_id_.append(create_order.order_id);
   quantity_.append(create_order.quantity);
@@ -41,6 +41,7 @@ void ModifyOrder::operator()(roq::ModifyOrder const &create_order) {
   routing_id_.append(create_order.routing_id);
   version_.append(create_order.version);
   conditional_on_version_.append(create_order.conditional_on_version);
+  return 1;
 }
 
 void ModifyOrder::append(third_party::clickhouse::Block &block) {

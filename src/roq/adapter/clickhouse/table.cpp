@@ -58,7 +58,7 @@ void detail::Common::create_table(
       "{}, "                             // origin_create_time_utc
       "{}"                               // extra_fields
       ") "
-      "ENGINE = ReplacingMergeTree() "
+      "ENGINE=ReplacingMergeTree() "
       "PARTITION BY toYearWeek({}) "  // receive_time_utc
       "ORDER BY ("
       "{}, "           // session_id
@@ -90,13 +90,15 @@ void detail::Common::clear() {
   origin_create_time_utc_.clear();
 }
 
-void detail::Common::operator()(roq::MessageInfo const &message_info, std::string_view const &gateway) {
-  gateway_.append(gateway);
-  session_id_.append(message_info.source_session_id);
-  seqno_.append(message_info.source_seqno);
-  source_.append(message_info.source_name);
-  receive_time_utc_.append(message_info.receive_time_utc);
-  origin_create_time_utc_.append(message_info.origin_create_time_utc);
+void detail::Common::operator()(roq::MessageInfo const &message_info, std::string_view const &gateway, size_t rows) {
+  for (size_t i = 0; i < rows; ++i) {
+    gateway_.append(gateway);
+    session_id_.append(message_info.source_session_id);
+    seqno_.append(message_info.source_seqno);
+    source_.append(message_info.source_name);
+    receive_time_utc_.append(message_info.receive_time_utc);
+    origin_create_time_utc_.append(message_info.origin_create_time_utc);
+  }
 }
 
 void detail::Common::append(third_party::clickhouse::Block &block) {

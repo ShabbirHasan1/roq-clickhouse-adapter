@@ -41,7 +41,7 @@ std::string GatewaySettings::get_fields() const {
       oms_request_id_type_);
 }
 
-void GatewaySettings::operator()(roq::GatewaySettings const &gateway_settings) {
+size_t GatewaySettings::operator()(roq::GatewaySettings const &gateway_settings) {
   supports_.append(gateway_settings.supports);
   mbp_max_depth_.append(gateway_settings.mbp_max_depth);
   mbp_tick_size_multiplier_.append(gateway_settings.mbp_tick_size_multiplier);
@@ -51,6 +51,7 @@ void GatewaySettings::operator()(roq::GatewaySettings const &gateway_settings) {
   oms_download_has_state_.append(gateway_settings.oms_download_has_state);
   oms_download_has_routing_id_.append(gateway_settings.oms_download_has_routing_id);
   oms_request_id_type_.append(gateway_settings.oms_request_id_type);
+  return 1;
 }
 
 void GatewaySettings::append(third_party::clickhouse::Block &block) {

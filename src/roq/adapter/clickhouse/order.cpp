@@ -90,7 +90,7 @@ std::string Order::get_fields() const {
       update_type_);
 }
 
-void Order::operator()(roq::OrderUpdate const &order_update) {
+size_t Order::operator()(roq::OrderUpdate const &order_update) {
   stream_id_.append(order_update.stream_id);
   account_.append(order_update.account);
   order_id_.append(order_update.order_id);
@@ -122,6 +122,7 @@ void Order::operator()(roq::OrderUpdate const &order_update) {
   max_response_version_.append(order_update.max_response_version);
   max_accepted_version_.append(order_update.max_accepted_version);
   update_type_.append(order_update.update_type);
+  return 1;
 }
 
 void Order::append(third_party::clickhouse::Block &block) {

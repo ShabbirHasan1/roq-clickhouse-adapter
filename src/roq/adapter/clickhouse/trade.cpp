@@ -47,7 +47,7 @@ std::string Trade::get_fields() const {
       update_type_);
 }
 
-void Trade::operator()(roq::TradeUpdate const &trade_update) {
+size_t Trade::operator()(roq::TradeUpdate const &trade_update) {
   stream_id_.append(trade_update.stream_id);
   account_.append(trade_update.account);
   order_id_.append(trade_update.order_id);
@@ -61,6 +61,7 @@ void Trade::operator()(roq::TradeUpdate const &trade_update) {
   external_order_id_.append(trade_update.external_order_id);
   routing_id_.append(trade_update.routing_id);
   update_type_.append(trade_update.update_type);
+  return 1;
 }
 
 void Trade::append(third_party::clickhouse::Block &block) {

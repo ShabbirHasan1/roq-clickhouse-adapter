@@ -38,7 +38,7 @@ std::string TopOfBook::get_fields() const {
       exchange_time_utc_);
 }
 
-void TopOfBook::operator()(roq::TopOfBook const &top_of_book) {
+size_t TopOfBook::operator()(roq::TopOfBook const &top_of_book) {
   stream_id_.append(top_of_book.stream_id);
   exchange_.append(top_of_book.exchange);
   symbol_.append(top_of_book.symbol);
@@ -48,6 +48,7 @@ void TopOfBook::operator()(roq::TopOfBook const &top_of_book) {
   ask_quantity_.append(top_of_book.layer.ask_quantity);
   update_type_.append(top_of_book.update_type);
   exchange_time_utc_.append(top_of_book.exchange_time_utc);
+  return 1;
 }
 
 void TopOfBook::append(third_party::clickhouse::Block &block) {

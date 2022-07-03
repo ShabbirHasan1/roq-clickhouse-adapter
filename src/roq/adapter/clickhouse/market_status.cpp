@@ -26,11 +26,12 @@ std::string MarketStatus::get_fields() const {
       trading_status_);
 }
 
-void MarketStatus::operator()(roq::MarketStatus const &market_status) {
+size_t MarketStatus::operator()(roq::MarketStatus const &market_status) {
   stream_id_.append(market_status.stream_id);
   exchange_.append(market_status.exchange);
   symbol_.append(market_status.symbol);
   trading_status_.append(market_status.trading_status);
+  return 1;
 }
 
 void MarketStatus::append(third_party::clickhouse::Block &block) {

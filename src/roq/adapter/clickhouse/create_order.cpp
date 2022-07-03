@@ -20,21 +20,21 @@ CreateOrder::CreateOrder()
 
 std::string CreateOrder::get_fields() const {
   return fmt::format(
-      "{}, "     // account
-      "{}, "     // order_id
-      "{}, "     // exchange
-      "{}, "     // symbol
-      "{}, "     // side
-      "{}, "     // position_effect
-      "{}, "     // max_show_quantity
-      "{}, "     // order_type
-      "{}, "     // time_in_force
-      "{}, "     // execution_instructions
-      "{}, "     // order_template
-      "{}, "     // quantity
-      "{}, "     // price
-      "{}, "     // stop_price
-      "{}, "sv,  // routing_id
+      "{}, "   // account
+      "{}, "   // order_id
+      "{}, "   // exchange
+      "{}, "   // symbol
+      "{}, "   // side
+      "{}, "   // position_effect
+      "{}, "   // max_show_quantity
+      "{}, "   // order_type
+      "{}, "   // time_in_force
+      "{}, "   // execution_instructions
+      "{}, "   // order_template
+      "{}, "   // quantity
+      "{}, "   // price
+      "{}, "   // stop_price
+      "{}"sv,  // routing_id
       account_,
       order_id_,
       exchange_,
@@ -52,7 +52,7 @@ std::string CreateOrder::get_fields() const {
       routing_id_);
 }
 
-void CreateOrder::operator()(roq::CreateOrder const &create_order) {
+size_t CreateOrder::operator()(roq::CreateOrder const &create_order) {
   account_.append(create_order.account);
   order_id_.append(create_order.order_id);
   exchange_.append(create_order.exchange);
@@ -68,6 +68,7 @@ void CreateOrder::operator()(roq::CreateOrder const &create_order) {
   price_.append(create_order.price);
   stop_price_.append(create_order.stop_price);
   routing_id_.append(create_order.routing_id);
+  return 1;
 }
 
 void CreateOrder::append(third_party::clickhouse::Block &block) {

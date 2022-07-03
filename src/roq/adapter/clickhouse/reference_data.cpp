@@ -73,7 +73,7 @@ std::string ReferenceData::get_fields() const {
       discard_);
 }
 
-void ReferenceData::operator()(roq::ReferenceData const &reference_data) {
+size_t ReferenceData::operator()(roq::ReferenceData const &reference_data) {
   stream_id_.append(reference_data.stream_id);
   exchange_.append(reference_data.exchange);
   symbol_.append(reference_data.symbol);
@@ -98,6 +98,7 @@ void ReferenceData::operator()(roq::ReferenceData const &reference_data) {
   expiry_datetime_.append(reference_data.expiry_datetime);
   expiry_datetime_utc_.append(reference_data.expiry_datetime_utc);
   discard_.append(reference_data.discard);
+  return 1;
 }
 
 void ReferenceData::append(third_party::clickhouse::Block &block) {

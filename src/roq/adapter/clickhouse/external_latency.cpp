@@ -23,10 +23,11 @@ std::string ExternalLatency::get_fields() const {
       latency_);
 }
 
-void ExternalLatency::operator()(roq::ExternalLatency const &external_latency) {
+size_t ExternalLatency::operator()(roq::ExternalLatency const &external_latency) {
   stream_id_.append(external_latency.stream_id);
   account_.append(external_latency.account);
   latency_.append(external_latency.latency);
+  return 1;
 }
 
 void ExternalLatency::append(third_party::clickhouse::Block &block) {

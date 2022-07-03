@@ -29,12 +29,13 @@ std::string MarketByPrice::get_fields() const {
       exchange_time_utc_);
 }
 
-void MarketByPrice::operator()(roq::MarketByPriceUpdate const &market_by_price_update) {
+size_t MarketByPrice::operator()(roq::MarketByPriceUpdate const &market_by_price_update) {
   stream_id_.append(market_by_price_update.stream_id);
   exchange_.append(market_by_price_update.exchange);
   symbol_.append(market_by_price_update.symbol);
   update_type_.append(market_by_price_update.update_type);
   exchange_time_utc_.append(market_by_price_update.exchange_time_utc);
+  return 1;
 }
 
 void MarketByPrice::append(third_party::clickhouse::Block &block) {

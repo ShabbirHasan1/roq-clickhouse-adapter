@@ -31,11 +31,12 @@ std::string TradeSummary::get_index_fields() const {
   return {};
 }
 
-void TradeSummary::operator()(roq::TradeSummary const &top_of_book) {
+size_t TradeSummary::operator()(roq::TradeSummary const &top_of_book) {
   stream_id_.append(top_of_book.stream_id);
   exchange_.append(top_of_book.exchange);
   symbol_.append(top_of_book.symbol);
   exchange_time_utc_.append(top_of_book.exchange_time_utc);
+  return 1;
 }
 
 void TradeSummary::append(third_party::clickhouse::Block &block) {

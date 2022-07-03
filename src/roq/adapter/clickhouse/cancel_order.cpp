@@ -17,11 +17,11 @@ CancelOrder::CancelOrder()
 
 std::string CancelOrder::get_fields() const {
   return fmt::format(
-      "{}, "     // account
-      "{}, "     // order_id
-      "{}, "     // routing_id
-      "{}, "     // version
-      "{}, "sv,  // conditional_on_version
+      "{}, "   // account
+      "{}, "   // order_id
+      "{}, "   // routing_id
+      "{}, "   // version
+      "{}"sv,  // conditional_on_version
       account_,
       order_id_,
       routing_id_,
@@ -29,12 +29,13 @@ std::string CancelOrder::get_fields() const {
       conditional_on_version_);
 }
 
-void CancelOrder::operator()(roq::CancelOrder const &create_order) {
+size_t CancelOrder::operator()(roq::CancelOrder const &create_order) {
   account_.append(create_order.account);
   order_id_.append(create_order.order_id);
   routing_id_.append(create_order.routing_id);
   version_.append(create_order.version);
   conditional_on_version_.append(create_order.conditional_on_version);
+  return 1;
 }
 
 void CancelOrder::append(third_party::clickhouse::Block &block) {

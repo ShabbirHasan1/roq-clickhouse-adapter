@@ -23,7 +23,7 @@ struct TradeSummary final {
   std::string get_fields() const;
   std::string get_index_fields() const;
 
-  void operator()(value_type const &);
+  size_t operator()(value_type const &);
 
   void append(third_party::clickhouse::Block &);
 

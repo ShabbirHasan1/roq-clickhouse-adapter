@@ -38,7 +38,7 @@ std::string Position::get_fields() const {
       short_quantity_begin_);
 }
 
-void Position::operator()(roq::PositionUpdate const &position_update) {
+size_t Position::operator()(roq::PositionUpdate const &position_update) {
   stream_id_.append(position_update.stream_id);
   account_.append(position_update.account);
   exchange_.append(position_update.exchange);
@@ -48,6 +48,7 @@ void Position::operator()(roq::PositionUpdate const &position_update) {
   short_quantity_.append(position_update.short_quantity);
   long_quantity_begin_.append(position_update.long_quantity_begin);
   short_quantity_begin_.append(position_update.short_quantity_begin);
+  return 1;
 }
 
 void Position::append(third_party::clickhouse::Block &block) {

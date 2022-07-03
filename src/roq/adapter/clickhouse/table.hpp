@@ -29,7 +29,7 @@ struct Common {
       std::string_view const &extra_fields,
       std::string_view const &extra_index_fields);
 
-  void operator()(roq::MessageInfo const &, std::string_view const &gateway);
+  void operator()(roq::MessageInfo const &, std::string_view const &gateway, size_t rows);
 
   void append(third_party::clickhouse::Block &);
 
@@ -53,10 +53,11 @@ struct Table {
 
   bool operator()(Event<typename T::value_type> const &event, std::string_view const &gateway, size_t counter) {
     auto &[message_info, value] = event;
-    common_(message_info, gateway);
-    table_(value);
+    auto rows = table_(value);
+    common_(message_info, gateway, rows);
     counter_ = counter;
-    return detail::is_full(++rows_);
+    rows_ += rows;
+    return detail::is_full(rows_);
   }
 
   void flush(third_party::clickhouse::Client &client, uint64_t counter, bool force = false) {

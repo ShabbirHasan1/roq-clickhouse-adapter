@@ -31,13 +31,14 @@ std::string Funds::get_fields() const {
       external_account_);
 }
 
-void Funds::operator()(roq::FundsUpdate const &funds_update) {
+size_t Funds::operator()(roq::FundsUpdate const &funds_update) {
   stream_id_.append(funds_update.stream_id);
   account_.append(funds_update.account);
   currency_.append(funds_update.currency);
   balance_.append(funds_update.balance);
   hold_.append(funds_update.hold);
   external_account_.append(funds_update.external_account);
+  return 1;
 }
 
 void Funds::append(third_party::clickhouse::Block &block) {

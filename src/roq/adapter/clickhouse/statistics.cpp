@@ -37,7 +37,7 @@ std::string Statistics::get_index_fields() const {
   return fmt::format(", {}"sv, type_.name());
 }
 
-void Statistics::operator()(roq::StatisticsUpdate const &statistics_update) {
+size_t Statistics::operator()(roq::StatisticsUpdate const &statistics_update) {
   for (auto &item : statistics_update.statistics) {
     stream_id_.append(statistics_update.stream_id);
     exchange_.append(statistics_update.exchange);
@@ -47,6 +47,7 @@ void Statistics::operator()(roq::StatisticsUpdate const &statistics_update) {
     update_type_.append(statistics_update.update_type);
     exchange_time_utc_.append(statistics_update.exchange_time_utc);
   }
+  return std::size(statistics_update.statistics);
 }
 
 void Statistics::append(third_party::clickhouse::Block &block) {

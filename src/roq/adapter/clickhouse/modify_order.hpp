@@ -23,7 +23,7 @@ struct ModifyOrder final {
   std::string get_fields() const;
   std::string get_index_fields() const { return {}; }
 
-  void operator()(value_type const &);
+  size_t operator()(value_type const &);
 
   void append(third_party::clickhouse::Block &);
 

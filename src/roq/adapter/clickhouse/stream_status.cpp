@@ -36,7 +36,7 @@ std::string StreamStatus::get_fields() const {
       connection_status_);
 }
 
-void StreamStatus::operator()(roq::StreamStatus const &stream_status) {
+size_t StreamStatus::operator()(roq::StreamStatus const &stream_status) {
   stream_id_.append(stream_status.stream_id);
   account_.append(stream_status.account);
   supports_.append(stream_status.supports);
@@ -45,6 +45,7 @@ void StreamStatus::operator()(roq::StreamStatus const &stream_status) {
   encoding_.append(stream_status.encoding);
   priority_.append(stream_status.priority);
   connection_status_.append(stream_status.connection_status);
+  return 1;
 }
 
 void StreamStatus::append(third_party::clickhouse::Block &block) {

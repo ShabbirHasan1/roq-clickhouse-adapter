@@ -26,11 +26,12 @@ std::string GatewayStatus::get_fields() const {
       unavailable_);
 }
 
-void GatewayStatus::operator()(roq::GatewayStatus const &gateway_status) {
+size_t GatewayStatus::operator()(roq::GatewayStatus const &gateway_status) {
   account_.append(gateway_status.account);
   supported_.append(gateway_status.supported);
   available_.append(gateway_status.available);
   unavailable_.append(gateway_status.unavailable);
+  return 1;
 }
 
 void GatewayStatus::append(third_party::clickhouse::Block &block) {
