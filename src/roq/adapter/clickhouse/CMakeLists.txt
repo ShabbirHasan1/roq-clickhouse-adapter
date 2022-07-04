@@ -7,6 +7,7 @@ set(SOURCES
     cancel_order.cpp
     controller.cpp
     create_order.cpp
+    custom_metrics.cpp
     external_latency.cpp
     funds.cpp
     gateway_settings.cpp

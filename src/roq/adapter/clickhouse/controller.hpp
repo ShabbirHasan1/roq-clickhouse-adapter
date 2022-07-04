@@ -15,6 +15,7 @@
 
 #include "roq/adapter/clickhouse/cancel_order.hpp"
 #include "roq/adapter/clickhouse/create_order.hpp"
+#include "roq/adapter/clickhouse/custom_metrics.hpp"
 #include "roq/adapter/clickhouse/external_latency.hpp"
 #include "roq/adapter/clickhouse/funds.hpp"
 #include "roq/adapter/clickhouse/gateway_settings.hpp"
@@ -75,6 +76,8 @@ class Controller final : public adapter::Handler {
 
   bool operator()(adapter::Category, Event<roq::FundsUpdate> const &) override;
 
+  bool operator()(adapter::Category, Event<roq::CustomMetricsUpdate> const &) override;
+
  protected:
   template <typename T, typename U>
   bool dispatch(adapter::Category, Event<T> const &, Table<U> &);
@@ -115,6 +118,7 @@ class Controller final : public adapter::Handler {
   Table<Trade> trade_;
   Table<Position> position_;
   Table<Funds> funds_;
+  Table<CustomMetrics> custom_metrics_;
   // cache
 };
 

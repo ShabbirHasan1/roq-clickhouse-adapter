@@ -54,6 +54,7 @@ Controller::Controller() : dispatcher_(adapter::Factory::create(*this)), client_
   trade_.create_table(client_);
   position_.create_table(client_);
   funds_.create_table(client_);
+  custom_metrics_.create_table(client_);
 }
 
 void Controller::dispatch() {
@@ -174,6 +175,10 @@ bool Controller::operator()(adapter::Category category, Event<roq::FundsUpdate> 
   return dispatch(category, event, funds_);
 }
 
+bool Controller::operator()(adapter::Category category, Event<roq::CustomMetricsUpdate> const &event) {
+  return dispatch(category, event, custom_metrics_);
+}
+
 template <typename T, typename U>
 bool Controller::dispatch(adapter::Category category, Event<T> const &event, Table<U> &table) {
   auto &feeds = feeds_[category];
@@ -204,6 +209,7 @@ void Controller::flush(bool force) {
   trade_.flush(client_, counter_, force);
   position_.flush(client_, counter_, force);
   funds_.flush(client_, counter_, force);
+  custom_metrics_.flush(client_, counter_, force);
 }
 
 void Controller::create_database() {
