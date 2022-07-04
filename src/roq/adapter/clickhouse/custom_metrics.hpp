@@ -15,7 +15,7 @@ struct CustomMetrics final {
 
   static const constexpr auto table_name = []() {
     using namespace std::literals;
-    return "statistics"sv;
+    return "custom_metrics"sv;
   }();
 
   CustomMetrics();
