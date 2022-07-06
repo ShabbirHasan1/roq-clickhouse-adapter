@@ -267,7 +267,7 @@ struct fmt::formatter<roq::adapter::clickhouse::Column<T, low_cardinality>> {
     return std::begin(context);
   }
   template <typename Context>
-  auto format(roq::adapter::clickhouse::Column<T, low_cardinality> const &value, Context &context) {
+  auto format(roq::adapter::clickhouse::Column<T, low_cardinality> const &value, Context &context) const {
     return value.format_to(context);
   }
 };
