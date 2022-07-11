@@ -33,6 +33,7 @@ find_package(ClickHouse_CPP REQUIRED)
 find_package(fmt REQUIRED)
 find_package(roq-adapter REQUIRED)
 find_package(roq-api REQUIRED)
+find_package(roq-io REQUIRED)
 find_package(roq-logging REQUIRED)
 
 # include
