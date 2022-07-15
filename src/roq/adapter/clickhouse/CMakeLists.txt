@@ -31,8 +31,13 @@ add_executable("${TARGET_NAME}" ${SOURCES})
 
 target_link_libraries(
   "${TARGET_NAME}"
-  PUBLIC roq-api::roq-api roq-logging::roq-logging
-  PRIVATE "${TARGET_NAME}-flags" roq-adapter::roq-adapter absl::flags_parse ${CLICKHOUSE_CPP_LIBRARIES}
+  PRIVATE "${TARGET_NAME}-flags"
+          roq-adapter::roq-adapter
+          roq-logging::roq-logging
+          roq-api::roq-api
+          fmt::fmt
+          absl::flags
+          ${CLICKHOUSE_CPP_LIBRARIES}
           ${UUID_LIBRARIES})
 
 target_compile_features("${TARGET_NAME}" PUBLIC cxx_std_20)
