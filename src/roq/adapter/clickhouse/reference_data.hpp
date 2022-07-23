@@ -41,6 +41,7 @@ struct ReferenceData final {
   Column<std::string_view, true> commission_currency_;
   Column<double> tick_size_;
   Column<double> multiplier_;
+  Column<double> min_notional_;
   Column<double> min_trade_vol_;
   Column<double> max_trade_vol_;
   Column<double> trade_vol_step_size_;

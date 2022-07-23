@@ -14,8 +14,8 @@ ReferenceData::ReferenceData()
     : stream_id_("stream_id"sv), exchange_("exchange"sv), symbol_("symbol"sv), description_("description"sv),
       security_type_("security_type"sv), base_currency_("base_currency"sv), quote_currency_("quote_currency"sv),
       margin_currency_("margin_currency"sv), commission_currency_("commission_currency"sv), tick_size_("tick_size"sv),
-      multiplier_("multiplier"sv), min_trade_vol_("min_trade_vol"sv), max_trade_vol_("max_trade_vol"sv),
-      trade_vol_step_size_("trade_vol_step_size"sv), option_type_("option_type"sv),
+      multiplier_("multiplier"sv), min_notional_("min_notional"sv), min_trade_vol_("min_trade_vol"sv),
+      max_trade_vol_("max_trade_vol"sv), trade_vol_step_size_("trade_vol_step_size"sv), option_type_("option_type"sv),
       strike_currency_("strike_currency"sv), strike_price_("strike_price"sv), underlying_("underlying"sv),
       time_zone_("time_zone"sv), issue_date_("issue_date"sv), settlement_date_("settlement_date"sv),
       expiry_datetime_("expiry_datetime"sv), expiry_datetime_utc_("expiry_datetime_utc"sv), discard_("discard"sv) {
@@ -34,6 +34,7 @@ std::string ReferenceData::get_fields() const {
       "{}, "   // commission_currency
       "{}, "   // tick_size
       "{}, "   // multiplier
+      "{}, "   // min_notional
       "{}, "   // min_trade_vol
       "{}, "   // max_trade_vol
       "{}, "   // trade_vol_step_size
@@ -58,6 +59,7 @@ std::string ReferenceData::get_fields() const {
       commission_currency_,
       tick_size_,
       multiplier_,
+      min_notional_,
       min_trade_vol_,
       max_trade_vol_,
       trade_vol_step_size_,
@@ -85,6 +87,7 @@ size_t ReferenceData::operator()(roq::ReferenceData const &reference_data) {
   commission_currency_.append(reference_data.commission_currency);
   tick_size_.append(reference_data.tick_size);
   multiplier_.append(reference_data.multiplier);
+  min_notional_.append(reference_data.min_notional);
   min_trade_vol_.append(reference_data.min_trade_vol);
   max_trade_vol_.append(reference_data.max_trade_vol);
   trade_vol_step_size_.append(reference_data.trade_vol_step_size);
@@ -113,6 +116,7 @@ void ReferenceData::append(third_party::clickhouse::Block &block) {
   commission_currency_.append(block);
   tick_size_.append(block);
   multiplier_.append(block);
+  min_notional_.append(block);
   min_trade_vol_.append(block);
   max_trade_vol_.append(block);
   trade_vol_step_size_.append(block);
@@ -140,6 +144,7 @@ void ReferenceData::clear() {
   commission_currency_.clear();
   tick_size_.clear();
   multiplier_.clear();
+  min_notional_.clear();
   min_trade_vol_.clear();
   max_trade_vol_.clear();
   trade_vol_step_size_.clear();
