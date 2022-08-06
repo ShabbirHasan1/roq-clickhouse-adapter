@@ -21,7 +21,7 @@ requirements:
   host:
     - roq-adapter
     - roq-client
-    - roq-oss-abseil-cpp
+    - abseil-cpp
     - roq-oss-catch2
     - roq-oss-clickhouse-cpp
     - roq-oss-magic_enum
