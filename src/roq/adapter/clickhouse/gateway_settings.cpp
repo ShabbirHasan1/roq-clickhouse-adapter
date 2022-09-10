@@ -15,7 +15,8 @@ GatewaySettings::GatewaySettings()
       mbp_tick_size_multiplier_("mbp_tick_size_multiplier"sv),
       mbp_min_trade_vol_multiplier_("mbp_min_trade_vol_multiplier"sv),
       mbp_allow_remove_non_existing_("mbp_allow_remove_non_existing"sv),
-      mbp_allow_price_inversion_("mbp_allow_price_inversion"sv), oms_download_has_state_("oms_download_has_state"sv),
+      mbp_allow_price_inversion_("mbp_allow_price_inversion"sv), mbp_checksum_("mbp_checksum"sv),
+      oms_download_has_state_("oms_download_has_state"sv),
       oms_download_has_routing_id_("oms_download_has_routing_id"sv), oms_request_id_type_("oms_request_id_type"sv) {
 }
 
@@ -27,6 +28,7 @@ std::string GatewaySettings::get_fields() const {
       "{}, "   // mbp_min_trade_vol_multiplier
       "{}, "   // mbp_allow_remove_non_existing
       "{}, "   // mbp_allow_price_inversion
+      "{}, "   // mbp_checksum
       "{}, "   // oms_download_has_state
       "{}, "   // oms_download_has_routing_id
       "{}"sv,  // oms_request_id_type
@@ -36,6 +38,7 @@ std::string GatewaySettings::get_fields() const {
       mbp_min_trade_vol_multiplier_,
       mbp_allow_remove_non_existing_,
       mbp_allow_price_inversion_,
+      mbp_checksum_,
       oms_download_has_state_,
       oms_download_has_routing_id_,
       oms_request_id_type_);
@@ -48,6 +51,7 @@ size_t GatewaySettings::operator()(roq::GatewaySettings const &gateway_settings)
   mbp_min_trade_vol_multiplier_.append(gateway_settings.mbp_min_trade_vol_multiplier);
   mbp_allow_remove_non_existing_.append(gateway_settings.mbp_allow_remove_non_existing);
   mbp_allow_price_inversion_.append(gateway_settings.mbp_allow_price_inversion);
+  mbp_checksum_.append(gateway_settings.mbp_checksum);
   oms_download_has_state_.append(gateway_settings.oms_download_has_state);
   oms_download_has_routing_id_.append(gateway_settings.oms_download_has_routing_id);
   oms_request_id_type_.append(gateway_settings.oms_request_id_type);
@@ -61,6 +65,7 @@ void GatewaySettings::append(third_party::clickhouse::Block &block) {
   mbp_min_trade_vol_multiplier_.append(block);
   mbp_allow_remove_non_existing_.append(block);
   mbp_allow_price_inversion_.append(block);
+  mbp_checksum_.append(block);
   oms_download_has_state_.append(block);
   oms_download_has_routing_id_.append(block);
   oms_request_id_type_.append(block);
@@ -73,6 +78,7 @@ void GatewaySettings::clear() {
   mbp_min_trade_vol_multiplier_.clear();
   mbp_allow_remove_non_existing_.clear();
   mbp_allow_price_inversion_.clear();
+  mbp_checksum_.clear();
   oms_download_has_state_.clear();
   oms_download_has_routing_id_.clear();
   oms_request_id_type_.clear();

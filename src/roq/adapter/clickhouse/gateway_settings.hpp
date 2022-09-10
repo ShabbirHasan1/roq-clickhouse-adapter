@@ -36,6 +36,7 @@ struct GatewaySettings final {
   Column<double> mbp_min_trade_vol_multiplier_;
   Column<bool> mbp_allow_remove_non_existing_;
   Column<bool> mbp_allow_price_inversion_;
+  Column<bool> mbp_checksum_;
   Column<bool> oms_download_has_state_;
   Column<bool> oms_download_has_routing_id_;
   Column<RequestIdType, true> oms_request_id_type_;
