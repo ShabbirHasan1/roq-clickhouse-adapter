@@ -23,7 +23,7 @@ requirements:
     - roq-adapter
     - roq-client
     - abseil-cpp
-    - roq-oss-catch2
+    - catch2
     - roq-oss-clickhouse-cpp
     - roq-oss-magic_enum
 
