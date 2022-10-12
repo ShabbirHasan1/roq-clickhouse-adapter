@@ -17,6 +17,8 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === HELPERS ===
+
 namespace {
 auto create_client() {
   third_party::clickhouse::ClientOptions options;
@@ -29,6 +31,8 @@ auto create_client() {
   return third_party::clickhouse::Client{options};
 }
 }  // namespace
+
+// === IMPLEMENTATION ===
 
 Controller::Controller() : dispatcher_(adapter::Factory::create(*this)), client_(create_client()) {
   create_database();
