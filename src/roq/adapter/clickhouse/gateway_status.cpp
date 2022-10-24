@@ -10,8 +10,10 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 GatewayStatus::GatewayStatus()
-    : account_("account"sv), supported_("supported"sv), available_("available"sv), unavailable_("unavailable"sv) {
+    : account_{"account"sv}, supported_{"supported"sv}, available_{"available"sv}, unavailable_{"unavailable"sv} {
 }
 
 std::string GatewayStatus::get_fields() const {

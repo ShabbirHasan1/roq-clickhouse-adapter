@@ -10,11 +10,13 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 OrderAck::OrderAck()
-    : stream_id_("stream_id"), account_("account"), order_id_("order_id"), exchange_("exchange"), symbol_("symbol"),
-      side_("side"), type_("type"), origin_("origin"), status_("status"), error_("error"), text_("text"),
-      request_id_("request_id"), external_account_("external_account"), external_order_id_("external_order_id"),
-      routing_id_("routing_id"), version_("version"), round_trip_latency_("round_trip_latency") {
+    : stream_id_{"stream_id"}, account_{"account"}, order_id_{"order_id"}, exchange_{"exchange"}, symbol_{"symbol"},
+      side_{"side"}, type_{"type"}, origin_{"origin"}, status_{"status"}, error_{"error"}, text_{"text"},
+      request_id_{"request_id"}, external_account_{"external_account"}, external_order_id_{"external_order_id"},
+      routing_id_{"routing_id"}, version_{"version"}, round_trip_latency_{"round_trip_latency"} {
 }
 
 std::string OrderAck::get_fields() const {

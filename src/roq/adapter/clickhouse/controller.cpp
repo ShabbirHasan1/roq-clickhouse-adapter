@@ -34,7 +34,7 @@ auto create_client() {
 
 // === IMPLEMENTATION ===
 
-Controller::Controller() : dispatcher_(adapter::Factory::create(*this)), client_(create_client()) {
+Controller::Controller() : dispatcher_{adapter::Factory::create(*this)}, client_{create_client()} {
   create_database();
   // completely processed event-logs (to avoid redundant inserts)
   create_processed_table();

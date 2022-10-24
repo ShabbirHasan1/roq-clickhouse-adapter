@@ -12,6 +12,8 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === HELPERS ===
+
 namespace detail {
 std::string create_table_name(std::string_view const &table_name) {
   return fmt::format("{}.{}"sv, flags::Flags::database(), table_name);  // prefix database name
@@ -35,9 +37,11 @@ bool sync(size_t last_update, size_t current) {
 }
 }  // namespace detail
 
+// === IMPLEMENTATION ===
+
 detail::Common::Common()
-    : gateway_("gateway"sv), session_id_("session_id"sv), seqno_("seqno"sv), source_("source"sv),
-      receive_time_utc_("receive_time_utc"sv), origin_create_time_utc_("origin_create_time_utc"sv) {
+    : gateway_{"gateway"sv}, session_id_{"session_id"sv}, seqno_{"seqno"sv}, source_{"source"sv},
+      receive_time_utc_{"receive_time_utc"sv}, origin_create_time_utc_{"origin_create_time_utc"sv} {
 }
 
 void detail::Common::create_table(

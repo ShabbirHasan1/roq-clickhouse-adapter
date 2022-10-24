@@ -10,12 +10,14 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 CreateOrder::CreateOrder()
-    : account_("account"), order_id_("order_id"), exchange_("exchange"), symbol_("symbol"), side_("side"),
-      position_effect_("position_effect"), max_show_quantity_("max_show_quantity"), order_type_("order_type"),
-      time_in_force_("time_in_force"), execution_instructions_("execution_instructions"),
-      order_template_("order_template"), quantity_("quantity"), price_("price"), stop_price_("stop_price"),
-      routing_id_("routing_id") {
+    : account_{"account"}, order_id_{"order_id"}, exchange_{"exchange"}, symbol_{"symbol"}, side_{"side"},
+      position_effect_{"position_effect"}, max_show_quantity_{"max_show_quantity"}, order_type_{"order_type"},
+      time_in_force_{"time_in_force"}, execution_instructions_{"execution_instructions"},
+      order_template_{"order_template"}, quantity_{"quantity"}, price_{"price"}, stop_price_{"stop_price"},
+      routing_id_{"routing_id"} {
 }
 
 std::string CreateOrder::get_fields() const {

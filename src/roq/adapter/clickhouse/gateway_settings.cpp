@@ -10,14 +10,16 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 GatewaySettings::GatewaySettings()
-    : supports_("supports"sv), mbp_max_depth_("mbp_max_depth"sv),
-      mbp_tick_size_multiplier_("mbp_tick_size_multiplier"sv),
-      mbp_min_trade_vol_multiplier_("mbp_min_trade_vol_multiplier"sv),
-      mbp_allow_remove_non_existing_("mbp_allow_remove_non_existing"sv),
-      mbp_allow_price_inversion_("mbp_allow_price_inversion"sv), mbp_checksum_("mbp_checksum"sv),
-      oms_download_has_state_("oms_download_has_state"sv),
-      oms_download_has_routing_id_("oms_download_has_routing_id"sv), oms_request_id_type_("oms_request_id_type"sv) {
+    : supports_{"supports"sv}, mbp_max_depth_{"mbp_max_depth"sv},
+      mbp_tick_size_multiplier_{"mbp_tick_size_multiplier"sv},
+      mbp_min_trade_vol_multiplier_{"mbp_min_trade_vol_multiplier"sv},
+      mbp_allow_remove_non_existing_{"mbp_allow_remove_non_existing"sv},
+      mbp_allow_price_inversion_{"mbp_allow_price_inversion"sv}, mbp_checksum_{"mbp_checksum"sv},
+      oms_download_has_state_{"oms_download_has_state"sv},
+      oms_download_has_routing_id_{"oms_download_has_routing_id"sv}, oms_request_id_type_{"oms_request_id_type"sv} {
 }
 
 std::string GatewaySettings::get_fields() const {

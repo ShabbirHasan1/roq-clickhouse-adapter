@@ -10,9 +10,11 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 MarketByPrice::MarketByPrice()
-    : stream_id_("stream_id"sv), exchange_("exchange"), symbol_("symbol"sv), update_type_("update_type"sv),
-      exchange_time_utc_("exchange_time_utc"sv) {
+    : stream_id_{"stream_id"sv}, exchange_{"exchange"}, symbol_{"symbol"sv}, update_type_{"update_type"sv},
+      exchange_time_utc_{"exchange_time_utc"sv} {
 }
 
 std::string MarketByPrice::get_fields() const {

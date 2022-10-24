@@ -10,7 +10,9 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
-ExternalLatency::ExternalLatency() : stream_id_("stream_id"sv), account_("account"sv), latency_("latency"sv) {
+// === IMPLEMENTATION ===
+
+ExternalLatency::ExternalLatency() : stream_id_{"stream_id"sv}, account_{"account"sv}, latency_{"latency"sv} {
 }
 
 std::string ExternalLatency::get_fields() const {

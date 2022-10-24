@@ -10,9 +10,11 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 Funds::Funds()
-    : stream_id_("stream_id"), account_("account"), currency_("currency"), balance_("balance"), hold_("hold"),
-      external_account_("external_account") {
+    : stream_id_{"stream_id"}, account_{"account"}, currency_{"currency"}, balance_{"balance"}, hold_{"hold"},
+      external_account_{"external_account"} {
 }
 
 std::string Funds::get_fields() const {

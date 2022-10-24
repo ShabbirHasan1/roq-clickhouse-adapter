@@ -10,8 +10,10 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 TradeSummary::TradeSummary()
-    : stream_id_("stream_id"sv), exchange_("exchange"), symbol_("symbol"sv), exchange_time_utc_("exchange_time_utc"sv) {
+    : stream_id_{"stream_id"sv}, exchange_{"exchange"}, symbol_{"symbol"sv}, exchange_time_utc_{"exchange_time_utc"sv} {
 }
 
 std::string TradeSummary::get_fields() const {

@@ -10,10 +10,12 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 StreamStatus::StreamStatus()
-    : stream_id_("stream_id"sv), account_("account"sv), supports_("supports"sv), transport_("transport"sv),
-      protocol_("protocol"sv), encoding_("encoding"sv), priority_("priority"sv),
-      connection_status_("connection_status"sv) {
+    : stream_id_{"stream_id"sv}, account_{"account"sv}, supports_{"supports"sv}, transport_{"transport"sv},
+      protocol_{"protocol"sv}, encoding_{"encoding"sv}, priority_{"priority"sv}, connection_status_{
+                                                                                     "connection_status"sv} {
 }
 
 std::string StreamStatus::get_fields() const {

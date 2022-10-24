@@ -10,10 +10,12 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 TopOfBook::TopOfBook()
-    : stream_id_("stream_id"sv), exchange_("exchange"), symbol_("symbol"sv), bid_price_("bid_price"sv),
-      bid_quantity_("bid_quantity"sv), ask_price_("ask_price"sv), ask_quantity_("ask_quantity"sv),
-      update_type_("update_type"sv), exchange_time_utc_("exchange_time_utc"sv) {
+    : stream_id_{"stream_id"sv}, exchange_{"exchange"}, symbol_{"symbol"sv}, bid_price_{"bid_price"sv},
+      bid_quantity_{"bid_quantity"sv}, ask_price_{"ask_price"sv}, ask_quantity_{"ask_quantity"sv},
+      update_type_{"update_type"sv}, exchange_time_utc_{"exchange_time_utc"sv} {
 }
 
 std::string TopOfBook::get_fields() const {

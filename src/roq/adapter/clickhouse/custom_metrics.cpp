@@ -10,9 +10,11 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 CustomMetrics::CustomMetrics()
-    : user_("user"), label_("label"), account_("account"), exchange_("exchange"), symbol_("symbol"), name_("name"),
-      value_("value") {
+    : user_{"user"}, label_{"label"}, account_{"account"}, exchange_{"exchange"}, symbol_{"symbol"}, name_{"name"},
+      value_{"value"} {
 }
 
 std::string CustomMetrics::get_fields() const {

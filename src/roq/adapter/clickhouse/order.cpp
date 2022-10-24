@@ -10,18 +10,20 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 Order::Order()
-    : stream_id_("stream_id"), account_("account"), order_id_("order_id"), exchange_("exchange"), symbol_("symbol"),
-      side_("side"), position_effect_("position_effect"), max_show_quantity_("max_show_quantity"),
-      order_type_("order_type"), time_in_force_("time_in_force"), execution_instructions_("execution_instructions"),
-      order_template_("order_template"), create_time_utc_("create_time_utc"), update_time_utc_("update_time_utc"),
-      external_account_("external_account"), external_order_id_("external_order_id"), status_("status"),
-      quantity_("quantity"), price_("price"), stop_price_("stop_price"), remaining_quantity_("remaining_quantity"),
-      traded_quantity_("traded_quantity"), average_traded_price_("average_traded_price"),
-      last_traded_quantity_("last_traded_quantity"), last_traded_price_("last_traded_price"),
-      last_liquidity_("last_liquidity"), routing_id_("routing_id"), max_request_version_("max_request_version"),
-      max_response_version_("max_response_version"), max_accepted_version_("max_accepted_version"),
-      update_type_("update_type") {
+    : stream_id_{"stream_id"}, account_{"account"}, order_id_{"order_id"}, exchange_{"exchange"}, symbol_{"symbol"},
+      side_{"side"}, position_effect_{"position_effect"}, max_show_quantity_{"max_show_quantity"},
+      order_type_{"order_type"}, time_in_force_{"time_in_force"}, execution_instructions_{"execution_instructions"},
+      order_template_{"order_template"}, create_time_utc_{"create_time_utc"}, update_time_utc_{"update_time_utc"},
+      external_account_{"external_account"}, external_order_id_{"external_order_id"}, status_{"status"},
+      quantity_{"quantity"}, price_{"price"}, stop_price_{"stop_price"}, remaining_quantity_{"remaining_quantity"},
+      traded_quantity_{"traded_quantity"}, average_traded_price_{"average_traded_price"},
+      last_traded_quantity_{"last_traded_quantity"}, last_traded_price_{"last_traded_price"},
+      last_liquidity_{"last_liquidity"}, routing_id_{"routing_id"}, max_request_version_{"max_request_version"},
+      max_response_version_{"max_response_version"}, max_accepted_version_{"max_accepted_version"}, update_type_{
+                                                                                                        "update_type"} {
 }
 
 std::string Order::get_fields() const {

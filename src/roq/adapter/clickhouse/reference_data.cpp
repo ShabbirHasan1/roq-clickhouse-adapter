@@ -10,15 +10,17 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 ReferenceData::ReferenceData()
-    : stream_id_("stream_id"sv), exchange_("exchange"sv), symbol_("symbol"sv), description_("description"sv),
-      security_type_("security_type"sv), base_currency_("base_currency"sv), quote_currency_("quote_currency"sv),
-      margin_currency_("margin_currency"sv), commission_currency_("commission_currency"sv), tick_size_("tick_size"sv),
-      multiplier_("multiplier"sv), min_notional_("min_notional"sv), min_trade_vol_("min_trade_vol"sv),
-      max_trade_vol_("max_trade_vol"sv), trade_vol_step_size_("trade_vol_step_size"sv), option_type_("option_type"sv),
-      strike_currency_("strike_currency"sv), strike_price_("strike_price"sv), underlying_("underlying"sv),
-      time_zone_("time_zone"sv), issue_date_("issue_date"sv), settlement_date_("settlement_date"sv),
-      expiry_datetime_("expiry_datetime"sv), expiry_datetime_utc_("expiry_datetime_utc"sv), discard_("discard"sv) {
+    : stream_id_{"stream_id"sv}, exchange_{"exchange"sv}, symbol_{"symbol"sv}, description_{"description"sv},
+      security_type_{"security_type"sv}, base_currency_{"base_currency"sv}, quote_currency_{"quote_currency"sv},
+      margin_currency_{"margin_currency"sv}, commission_currency_{"commission_currency"sv}, tick_size_{"tick_size"sv},
+      multiplier_{"multiplier"sv}, min_notional_{"min_notional"sv}, min_trade_vol_{"min_trade_vol"sv},
+      max_trade_vol_{"max_trade_vol"sv}, trade_vol_step_size_{"trade_vol_step_size"sv}, option_type_{"option_type"sv},
+      strike_currency_{"strike_currency"sv}, strike_price_{"strike_price"sv}, underlying_{"underlying"sv},
+      time_zone_{"time_zone"sv}, issue_date_{"issue_date"sv}, settlement_date_{"settlement_date"sv},
+      expiry_datetime_{"expiry_datetime"sv}, expiry_datetime_utc_{"expiry_datetime_utc"sv}, discard_{"discard"sv} {
 }
 
 std::string ReferenceData::get_fields() const {

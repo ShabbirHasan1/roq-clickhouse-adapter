@@ -10,9 +10,11 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 Statistics::Statistics()
-    : stream_id_("stream_id"sv), exchange_("exchange"), symbol_("symbol"sv), type_("type"sv), value_("value"sv),
-      update_type_("update_type"sv), exchange_time_utc_("exchange_time_utc"sv) {
+    : stream_id_{"stream_id"sv}, exchange_{"exchange"}, symbol_{"symbol"sv}, type_{"type"sv}, value_{"value"sv},
+      update_type_{"update_type"sv}, exchange_time_utc_{"exchange_time_utc"sv} {
 }
 
 std::string Statistics::get_fields() const {

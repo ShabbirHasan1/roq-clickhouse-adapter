@@ -10,10 +10,12 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
+// === IMPLEMENTATION ===
+
 Position::Position()
-    : stream_id_("stream_id"), account_("account"), exchange_("exchange"), symbol_("symbol"),
-      external_account_("external_account"), long_quantity_("long_quantity"), short_quantity_("short_quantity"),
-      long_quantity_begin_("long_quantity_begin"), short_quantity_begin_("short_quantity_begin") {
+    : stream_id_{"stream_id"}, account_{"account"}, exchange_{"exchange"}, symbol_{"symbol"},
+      external_account_{"external_account"}, long_quantity_{"long_quantity"}, short_quantity_{"short_quantity"},
+      long_quantity_begin_{"long_quantity_begin"}, short_quantity_begin_{"short_quantity_begin"} {
 }
 
 std::string Position::get_fields() const {
