@@ -21,6 +21,6 @@ fi
 
 $PREFIX "./roq-clickhouse-adapter" \
   --name=clickhouse \
-  --metrics_listen_address=1234 \
+  --service_listen_address=1234 \
   --event_log_dir=$HOME/var/lib/roq/data \
   $@
