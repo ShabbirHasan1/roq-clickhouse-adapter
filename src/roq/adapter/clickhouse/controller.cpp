@@ -78,7 +78,7 @@ void Controller::dispatch() {
   }
 }
 
-bool Controller::operator()(adapter::Category category, adapter::Add const &add) {
+bool Controller::operator()(Category category, adapter::Add const &add) {
   log::info(R"(Adding session_id="{}")"sv, add.session_id);
   auto &processed = processed_[category];
   auto &key = add.session_id;
@@ -92,7 +92,7 @@ bool Controller::operator()(adapter::Category category, adapter::Add const &add)
   }
 }
 
-void Controller::operator()(adapter::Category category, adapter::Remove const &remove) {
+void Controller::operator()(Category category, adapter::Remove const &remove) {
   auto &feeds = feeds_[category];
   auto &key = remove.session_id;
   auto iter = feeds.find(key);
@@ -107,84 +107,84 @@ void Controller::operator()(adapter::Category category, adapter::Remove const &r
   }
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::GatewaySettings> const &event) {
+bool Controller::operator()(Category category, Event<roq::GatewaySettings> const &event) {
   return dispatch(category, event, gateway_settings_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::StreamStatus> const &event) {
+bool Controller::operator()(Category category, Event<roq::StreamStatus> const &event) {
   return dispatch(category, event, stream_status_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::ExternalLatency> const &event) {
+bool Controller::operator()(Category category, Event<roq::ExternalLatency> const &event) {
   return dispatch(category, event, external_latency_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::GatewayStatus> const &event) {
+bool Controller::operator()(Category category, Event<roq::GatewayStatus> const &event) {
   return dispatch(category, event, gateway_status_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::ReferenceData> const &event) {
+bool Controller::operator()(Category category, Event<roq::ReferenceData> const &event) {
   return dispatch(category, event, reference_data_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::MarketStatus> const &event) {
+bool Controller::operator()(Category category, Event<roq::MarketStatus> const &event) {
   return dispatch(category, event, market_status_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::TopOfBook> const &event) {
+bool Controller::operator()(Category category, Event<roq::TopOfBook> const &event) {
   return dispatch(category, event, top_of_book_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::MarketByPriceUpdate> const &event) {
+bool Controller::operator()(Category category, Event<roq::MarketByPriceUpdate> const &event) {
   return dispatch(category, event, market_by_price_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::TradeSummary> const &event) {
+bool Controller::operator()(Category category, Event<roq::TradeSummary> const &event) {
   return dispatch(category, event, trade_summary_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::StatisticsUpdate> const &event) {
+bool Controller::operator()(Category category, Event<roq::StatisticsUpdate> const &event) {
   return dispatch(category, event, statistics_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::CreateOrder> const &event) {
+bool Controller::operator()(Category category, Event<roq::CreateOrder> const &event) {
   return dispatch(category, event, create_order_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::ModifyOrder> const &event) {
+bool Controller::operator()(Category category, Event<roq::ModifyOrder> const &event) {
   return dispatch(category, event, modify_order_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::CancelOrder> const &event) {
+bool Controller::operator()(Category category, Event<roq::CancelOrder> const &event) {
   return dispatch(category, event, cancel_order_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::OrderAck> const &event) {
+bool Controller::operator()(Category category, Event<roq::OrderAck> const &event) {
   return dispatch(category, event, order_ack_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::OrderUpdate> const &event) {
+bool Controller::operator()(Category category, Event<roq::OrderUpdate> const &event) {
   return dispatch(category, event, order_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::TradeUpdate> const &event) {
+bool Controller::operator()(Category category, Event<roq::TradeUpdate> const &event) {
   return dispatch(category, event, trade_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::PositionUpdate> const &event) {
+bool Controller::operator()(Category category, Event<roq::PositionUpdate> const &event) {
   return dispatch(category, event, position_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::FundsUpdate> const &event) {
+bool Controller::operator()(Category category, Event<roq::FundsUpdate> const &event) {
   return dispatch(category, event, funds_);
 }
 
-bool Controller::operator()(adapter::Category category, Event<roq::CustomMetricsUpdate> const &event) {
+bool Controller::operator()(Category category, Event<roq::CustomMetricsUpdate> const &event) {
   return dispatch(category, event, custom_metrics_);
 }
 
 template <typename T, typename U>
-bool Controller::dispatch(adapter::Category category, Event<T> const &event, Table<U> &table) {
+bool Controller::dispatch(Category category, Event<T> const &event, Table<U> &table) {
   auto &feeds = feeds_[category];
   auto &key = event.message_info.source_session_id;
   auto iter = feeds.find(key);
@@ -244,14 +244,14 @@ void Controller::load_processed_table() {
       auto category_ = (*category).At(i);
       auto session_id_ = (*session_id).At(i);
       // parse
-      auto key = magic_enum::enum_cast<adapter::Category>(category_).value();
+      auto key = magic_enum::enum_cast<Category>(category_).value();
       auto value = from_uint128(session_id_);
       processed_[key].emplace(value);
     }
   });
 }
 
-void Controller::insert_processed(adapter::Category category, const UUID &session_id) {
+void Controller::insert_processed(Category category, const UUID &session_id) {
   auto category_ = std::make_shared<third_party::clickhouse::ColumnString>();
   auto session_id_ = std::make_shared<third_party::clickhouse::ColumnUUID>();
   (*category_).Append(magic_enum::enum_name(category));

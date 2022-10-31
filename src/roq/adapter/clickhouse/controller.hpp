@@ -47,40 +47,40 @@ class Controller final : public adapter::Handler {
   void dispatch();
 
  protected:
-  bool operator()(adapter::Category, adapter::Add const &) override;
-  void operator()(adapter::Category, adapter::Remove const &) override;
+  bool operator()(Category, adapter::Add const &) override;
+  void operator()(Category, adapter::Remove const &) override;
 
   // events
 
-  bool operator()(adapter::Category, Event<roq::GatewaySettings> const &) override;
-  bool operator()(adapter::Category, Event<roq::StreamStatus> const &) override;
-  bool operator()(adapter::Category, Event<roq::ExternalLatency> const &) override;
-  bool operator()(adapter::Category, Event<roq::GatewayStatus> const &) override;
+  bool operator()(Category, Event<roq::GatewaySettings> const &) override;
+  bool operator()(Category, Event<roq::StreamStatus> const &) override;
+  bool operator()(Category, Event<roq::ExternalLatency> const &) override;
+  bool operator()(Category, Event<roq::GatewayStatus> const &) override;
 
-  bool operator()(adapter::Category, Event<roq::ReferenceData> const &) override;
-  bool operator()(adapter::Category, Event<roq::MarketStatus> const &) override;
-  bool operator()(adapter::Category, Event<roq::TopOfBook> const &) override;
-  bool operator()(adapter::Category, Event<roq::MarketByPriceUpdate> const &) override;
-  bool operator()(adapter::Category, Event<roq::TradeSummary> const &) override;
-  bool operator()(adapter::Category, Event<roq::StatisticsUpdate> const &) override;
+  bool operator()(Category, Event<roq::ReferenceData> const &) override;
+  bool operator()(Category, Event<roq::MarketStatus> const &) override;
+  bool operator()(Category, Event<roq::TopOfBook> const &) override;
+  bool operator()(Category, Event<roq::MarketByPriceUpdate> const &) override;
+  bool operator()(Category, Event<roq::TradeSummary> const &) override;
+  bool operator()(Category, Event<roq::StatisticsUpdate> const &) override;
 
-  bool operator()(adapter::Category, Event<roq::CreateOrder> const &) override;
-  bool operator()(adapter::Category, Event<roq::ModifyOrder> const &) override;
-  bool operator()(adapter::Category, Event<roq::CancelOrder> const &) override;
+  bool operator()(Category, Event<roq::CreateOrder> const &) override;
+  bool operator()(Category, Event<roq::ModifyOrder> const &) override;
+  bool operator()(Category, Event<roq::CancelOrder> const &) override;
 
-  bool operator()(adapter::Category, Event<roq::OrderAck> const &) override;
-  bool operator()(adapter::Category, Event<roq::OrderUpdate> const &) override;
+  bool operator()(Category, Event<roq::OrderAck> const &) override;
+  bool operator()(Category, Event<roq::OrderUpdate> const &) override;
 
-  bool operator()(adapter::Category, Event<roq::TradeUpdate> const &) override;
-  bool operator()(adapter::Category, Event<roq::PositionUpdate> const &) override;
+  bool operator()(Category, Event<roq::TradeUpdate> const &) override;
+  bool operator()(Category, Event<roq::PositionUpdate> const &) override;
 
-  bool operator()(adapter::Category, Event<roq::FundsUpdate> const &) override;
+  bool operator()(Category, Event<roq::FundsUpdate> const &) override;
 
-  bool operator()(adapter::Category, Event<roq::CustomMetricsUpdate> const &) override;
+  bool operator()(Category, Event<roq::CustomMetricsUpdate> const &) override;
 
  protected:
   template <typename T, typename U>
-  bool dispatch(adapter::Category, Event<T> const &, Table<U> &);
+  bool dispatch(Category, Event<T> const &, Table<U> &);
 
   void flush(bool force = false);
 
@@ -89,13 +89,13 @@ class Controller final : public adapter::Handler {
 
   void load_processed_table();
 
-  void insert_processed(adapter::Category, const UUID &);
+  void insert_processed(Category, const UUID &);
 
  private:
   const std::unique_ptr<adapter::Dispatcher> dispatcher_;
   // event-logs
-  absl::flat_hash_map<adapter::Category, absl::flat_hash_set<UUID>> processed_;
-  absl::flat_hash_map<adapter::Category, absl::flat_hash_map<UUID, std::string>> feeds_;
+  absl::flat_hash_map<Category, absl::flat_hash_set<UUID>> processed_;
+  absl::flat_hash_map<Category, absl::flat_hash_map<UUID, std::string>> feeds_;
   // state
   third_party::clickhouse::Client client_;
   size_t counter_ = {};
