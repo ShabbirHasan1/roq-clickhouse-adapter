@@ -29,7 +29,7 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 # dependencies
 
 find_package(absl REQUIRED)
-find_package(ClickHouse_CPP REQUIRED)
+find_package(ClickHouse_CPP REQUIRED) # XXX
 find_package(fmt REQUIRED)
 find_package(roq-adapter REQUIRED)
 find_package(roq-api REQUIRED)
