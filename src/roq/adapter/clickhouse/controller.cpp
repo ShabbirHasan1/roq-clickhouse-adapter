@@ -13,6 +13,8 @@
 
 using namespace std::literals;
 
+using namespace fmt::literals;
+
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -86,7 +88,7 @@ bool Controller::operator()(Category category, adapter::Add const &add) {
     return true;
   } else {
     auto &feeds = feeds_[category];
-    auto res = feeds.try_emplace(key, add.name);
+    [[maybe_unused]] auto res = feeds.try_emplace(key, add.name);
     assert(res.second);
     return false;
   }
@@ -217,7 +219,7 @@ void Controller::flush(bool force) {
 }
 
 void Controller::create_database() {
-  auto query = fmt::format("CREATE DATABASE IF NOT EXISTS {}"sv, flags::Flags::database());
+  auto query = fmt::format("CREATE DATABASE IF NOT EXISTS {}"_cf, flags::Flags::database());
   client_.Execute(query);
 }
 
@@ -228,13 +230,13 @@ void Controller::create_processed_table() {
       "session_id UUID"
       ") "
       "ENGINE = ReplacingMergeTree() "
-      "ORDER BY (session_id)"sv,
+      "ORDER BY (session_id)"_cf,
       flags::Flags::database());
   client_.Execute(query);
 }
 
 void Controller::load_processed_table() {
-  auto query = fmt::format("SELECT category, session_id FROM {}.processed"sv, flags::Flags::database());
+  auto query = fmt::format("SELECT category, session_id FROM {}.processed"_cf, flags::Flags::database());
   client_.Select(query, [this](auto &block) {
     if (block.GetRowCount() == 0)
       return;
@@ -259,7 +261,7 @@ void Controller::insert_processed(Category category, const UUID &session_id) {
   third_party::clickhouse::Block block;
   block.AppendColumn("category"s, category_);
   block.AppendColumn("session_id"s, session_id_);
-  auto table_name = fmt::format("{}.processed"sv, flags::Flags::database());
+  auto table_name = fmt::format("{}.processed"_cf, flags::Flags::database());
   client_.Insert(table_name, block);
 }
 

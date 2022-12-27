@@ -6,6 +6,8 @@
 
 using namespace std::literals;
 
+using namespace fmt::literals;
+
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -21,23 +23,23 @@ OrderAck::OrderAck()
 
 std::string OrderAck::get_fields() const {
   return fmt::format(
-      "{}, "   // stream_id,
-      "{}, "   // account,
-      "{}, "   // order_id,
-      "{}, "   // exchange,
-      "{}, "   // symbol,
-      "{}, "   // side,
-      "{}, "   // type,
-      "{}, "   // origin,
-      "{}, "   // status,
-      "{}, "   // error,
-      "{}, "   // text,
-      "{}, "   // request_id,
-      "{}, "   // external_account,
-      "{}, "   // external_order_id,
-      "{}, "   // routing_id,
-      "{}, "   // version,
-      "{}"sv,  // round_trip_latency
+      "{}, "    // stream_id,
+      "{}, "    // account,
+      "{}, "    // order_id,
+      "{}, "    // exchange,
+      "{}, "    // symbol,
+      "{}, "    // side,
+      "{}, "    // type,
+      "{}, "    // origin,
+      "{}, "    // status,
+      "{}, "    // error,
+      "{}, "    // text,
+      "{}, "    // request_id,
+      "{}, "    // external_account,
+      "{}, "    // external_order_id,
+      "{}, "    // routing_id,
+      "{}, "    // version,
+      "{}"_cf,  // round_trip_latency
       stream_id_,
       account_,
       order_id_,

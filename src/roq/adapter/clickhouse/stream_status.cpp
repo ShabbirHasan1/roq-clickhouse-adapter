@@ -6,6 +6,8 @@
 
 using namespace std::literals;
 
+using namespace fmt::literals;
+
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -20,14 +22,14 @@ StreamStatus::StreamStatus()
 
 std::string StreamStatus::get_fields() const {
   return fmt::format(
-      "{}, "   // stream_id
-      "{}, "   // account
-      "{}, "   // supports
-      "{}, "   // transport
-      "{}, "   // protocol
-      "{}, "   // encoding
-      "{}, "   // priority
-      "{}"sv,  // connection_status
+      "{}, "    // stream_id
+      "{}, "    // account
+      "{}, "    // supports
+      "{}, "    // transport
+      "{}, "    // protocol
+      "{}, "    // encoding
+      "{}, "    // priority
+      "{}"_cf,  // connection_status
       stream_id_,
       account_,
       supports_,

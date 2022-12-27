@@ -247,8 +247,8 @@ struct Column final {
 
   template <typename Context>
   auto format_to(Context &context) const {
-    using namespace std::literals;
-    return fmt::format_to(context.out(), "{} {}"sv, name_, meta_type::database_type);
+    using namespace fmt::literals;
+    return fmt::format_to(context.out(), "{} {}"_cf, name_, meta_type::database_type);
   }
 
  private:

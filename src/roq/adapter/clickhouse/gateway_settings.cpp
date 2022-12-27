@@ -6,6 +6,8 @@
 
 using namespace std::literals;
 
+using namespace fmt::literals;
+
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -24,16 +26,16 @@ GatewaySettings::GatewaySettings()
 
 std::string GatewaySettings::get_fields() const {
   return fmt::format(
-      "{}, "   // supports
-      "{}, "   // mbp_max_depth
-      "{}, "   // mbp_tick_size_multiplier
-      "{}, "   // mbp_min_trade_vol_multiplier
-      "{}, "   // mbp_allow_remove_non_existing
-      "{}, "   // mbp_allow_price_inversion
-      "{}, "   // mbp_checksum
-      "{}, "   // oms_download_has_state
-      "{}, "   // oms_download_has_routing_id
-      "{}"sv,  // oms_request_id_type
+      "{}, "    // supports
+      "{}, "    // mbp_max_depth
+      "{}, "    // mbp_tick_size_multiplier
+      "{}, "    // mbp_min_trade_vol_multiplier
+      "{}, "    // mbp_allow_remove_non_existing
+      "{}, "    // mbp_allow_price_inversion
+      "{}, "    // mbp_checksum
+      "{}, "    // oms_download_has_state
+      "{}, "    // oms_download_has_routing_id
+      "{}"_cf,  // oms_request_id_type
       supports_,
       mbp_max_depth_,
       mbp_tick_size_multiplier_,

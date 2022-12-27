@@ -6,6 +6,8 @@
 
 using namespace std::literals;
 
+using namespace fmt::literals;
+
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -16,10 +18,10 @@ MarketStatus::MarketStatus()
 
 std::string MarketStatus::get_fields() const {
   return fmt::format(
-      "{}, "   // stream_id
-      "{}, "   // exchange
-      "{}, "   // symbol
-      "{}"sv,  // trading_status
+      "{}, "    // stream_id
+      "{}, "    // exchange
+      "{}, "    // symbol
+      "{}"_cf,  // trading_status
       stream_id_,
       exchange_,
       symbol_,

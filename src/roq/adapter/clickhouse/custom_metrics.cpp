@@ -6,6 +6,8 @@
 
 using namespace std::literals;
 
+using namespace fmt::literals;
+
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -19,13 +21,13 @@ CustomMetrics::CustomMetrics()
 
 std::string CustomMetrics::get_fields() const {
   return fmt::format(
-      "{}, "   // user
-      "{}, "   // label
-      "{}, "   // account
-      "{}, "   // exchange
-      "{}, "   // symbol
-      "{}, "   // name
-      "{}"sv,  // value
+      "{}, "    // user
+      "{}, "    // label
+      "{}, "    // account
+      "{}, "    // exchange
+      "{}, "    // symbol
+      "{}, "    // name
+      "{}"_cf,  // value
       user_,
       label_,
       account_,
@@ -36,7 +38,7 @@ std::string CustomMetrics::get_fields() const {
 }
 
 std::string CustomMetrics::get_index_fields() const {
-  return fmt::format(", {}"sv, name_.name());
+  return fmt::format(", {}"_cf, name_.name());
 }
 
 size_t CustomMetrics::operator()(roq::CustomMetricsUpdate const &custom_metrics_update) {

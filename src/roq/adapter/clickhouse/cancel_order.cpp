@@ -6,6 +6,8 @@
 
 using namespace std::literals;
 
+using namespace fmt::literals;
+
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -19,11 +21,11 @@ CancelOrder::CancelOrder()
 
 std::string CancelOrder::get_fields() const {
   return fmt::format(
-      "{}, "   // account
-      "{}, "   // order_id
-      "{}, "   // routing_id
-      "{}, "   // version
-      "{}"sv,  // conditional_on_version
+      "{}, "    // account
+      "{}, "    // order_id
+      "{}, "    // routing_id
+      "{}, "    // version
+      "{}"_cf,  // conditional_on_version
       account_,
       order_id_,
       routing_id_,

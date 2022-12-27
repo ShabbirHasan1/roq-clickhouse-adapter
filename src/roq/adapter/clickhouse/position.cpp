@@ -6,6 +6,8 @@
 
 using namespace std::literals;
 
+using namespace fmt::literals;
+
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -20,15 +22,15 @@ Position::Position()
 
 std::string Position::get_fields() const {
   return fmt::format(
-      "{}, "   // stream_id
-      "{}, "   // account
-      "{}, "   // exchange
-      "{}, "   // symbol
-      "{}, "   // external_account
-      "{}, "   // long_quantity
-      "{}, "   // short_quantity
-      "{}, "   // long_quantity_begin
-      "{}"sv,  // short_quantity_begin
+      "{}, "    // stream_id
+      "{}, "    // account
+      "{}, "    // exchange
+      "{}, "    // symbol
+      "{}, "    // external_account
+      "{}, "    // long_quantity
+      "{}, "    // short_quantity
+      "{}, "    // long_quantity_begin
+      "{}"_cf,  // short_quantity_begin
       stream_id_,
       account_,
       exchange_,

@@ -6,6 +6,8 @@
 
 using namespace std::literals;
 
+using namespace fmt::literals;
+
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -28,37 +30,37 @@ Order::Order()
 
 std::string Order::get_fields() const {
   return fmt::format(
-      "{}, "   // stream_id
-      "{}, "   // account
-      "{}, "   // order_id
-      "{}, "   // exchange
-      "{}, "   // symbol
-      "{}, "   // side
-      "{}, "   // position_effect
-      "{}, "   // max_show_quantity
-      "{}, "   // order_type
-      "{}, "   // time_in_force
-      "{}, "   // execution_instructions
-      "{}, "   // order_template
-      "{}, "   // create_time_utc
-      "{}, "   // update_time_utc
-      "{}, "   // external_account
-      "{}, "   // external_order_id
-      "{}, "   // status
-      "{}, "   // quantity
-      "{}, "   // price
-      "{}, "   // stop_price
-      "{}, "   // remaining_quantity
-      "{}, "   // traded_quantity
-      "{}, "   // average_traded_price
-      "{}, "   // last_traded_quantity
-      "{}, "   // last_traded_price
-      "{}, "   // last_liquidity
-      "{}, "   // routing_id
-      "{}, "   // max_request_version
-      "{}, "   // max_response_version
-      "{}, "   // max_accepted_version
-      "{}"sv,  // update_type
+      "{}, "    // stream_id
+      "{}, "    // account
+      "{}, "    // order_id
+      "{}, "    // exchange
+      "{}, "    // symbol
+      "{}, "    // side
+      "{}, "    // position_effect
+      "{}, "    // max_show_quantity
+      "{}, "    // order_type
+      "{}, "    // time_in_force
+      "{}, "    // execution_instructions
+      "{}, "    // order_template
+      "{}, "    // create_time_utc
+      "{}, "    // update_time_utc
+      "{}, "    // external_account
+      "{}, "    // external_order_id
+      "{}, "    // status
+      "{}, "    // quantity
+      "{}, "    // price
+      "{}, "    // stop_price
+      "{}, "    // remaining_quantity
+      "{}, "    // traded_quantity
+      "{}, "    // average_traded_price
+      "{}, "    // last_traded_quantity
+      "{}, "    // last_traded_price
+      "{}, "    // last_liquidity
+      "{}, "    // routing_id
+      "{}, "    // max_request_version
+      "{}, "    // max_response_version
+      "{}, "    // max_accepted_version
+      "{}"_cf,  // update_type
       stream_id_,
       account_,
       order_id_,

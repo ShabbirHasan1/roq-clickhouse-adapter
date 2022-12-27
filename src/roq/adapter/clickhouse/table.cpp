@@ -8,6 +8,8 @@
 
 using namespace std::literals;
 
+using namespace fmt::literals;
+
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -16,7 +18,7 @@ namespace clickhouse {
 
 namespace detail {
 std::string create_table_name(std::string_view const &table_name) {
-  return fmt::format("{}.{}"sv, flags::Flags::database(), table_name);  // prefix database name
+  return fmt::format("{}.{}"_cf, flags::Flags::database(), table_name);  // prefix database name
 }
 
 bool is_full(size_t rows) {
@@ -68,7 +70,7 @@ void detail::Common::create_table(
       "{}, "           // session_id
       "intHash64({})"  // seqno
       "{}"             // extra_index_fields
-      ")"sv,
+      ")"_cf,
       table_name,
       gateway_,
       session_id_,
