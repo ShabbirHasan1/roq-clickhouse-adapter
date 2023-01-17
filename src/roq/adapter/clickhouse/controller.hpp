@@ -37,8 +37,7 @@ namespace roq {
 namespace adapter {
 namespace clickhouse {
 
-class Controller final : public adapter::Handler {
- public:
+struct Controller final : public adapter::Handler {
   Controller();
 
   Controller(Controller const &) = delete;
