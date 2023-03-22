@@ -15,9 +15,9 @@ namespace clickhouse {
 // === IMPLEMENTATION ===
 
 ModifyOrder::ModifyOrder()
-    : account_{"account"}, order_id_{"order_id"}, quantity_{"quantity"}, price_{"price"},
-      request_template_{"request_template"}, routing_id_{"routing_id"}, version_{"version"},
-      conditional_on_version_{"conditional_on_version"} {
+    : account_{"account"}, order_id_{"order_id"}, request_template_{"request_template"}, quantity_{"quantity"},
+      price_{"price"}, routing_id_{"routing_id"}, version_{"version"}, conditional_on_version_{
+                                                                           "conditional_on_version"} {
 }
 
 std::string ModifyOrder::get_fields() const {
