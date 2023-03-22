@@ -32,6 +32,7 @@ struct CancelOrder final {
  private:
   Column<std::string_view, true> account_;
   Column<uint32_t> order_id_;
+  Column<std::string_view, true> request_template_;
   Column<std::string_view> routing_id_;
   Column<uint32_t> version_;
   Column<uint32_t> conditional_on_version_;

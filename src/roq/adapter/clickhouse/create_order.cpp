@@ -18,7 +18,7 @@ CreateOrder::CreateOrder()
     : account_{"account"}, order_id_{"order_id"}, exchange_{"exchange"}, symbol_{"symbol"}, side_{"side"},
       position_effect_{"position_effect"}, max_show_quantity_{"max_show_quantity"}, order_type_{"order_type"},
       time_in_force_{"time_in_force"}, execution_instructions_{"execution_instructions"},
-      order_template_{"order_template"}, quantity_{"quantity"}, price_{"price"}, stop_price_{"stop_price"},
+      request_template_{"request_template"}, quantity_{"quantity"}, price_{"price"}, stop_price_{"stop_price"},
       routing_id_{"routing_id"} {
 }
 
@@ -34,7 +34,7 @@ std::string CreateOrder::get_fields() const {
       "{}, "    // order_type
       "{}, "    // time_in_force
       "{}, "    // execution_instructions
-      "{}, "    // order_template
+      "{}, "    // request_template
       "{}, "    // quantity
       "{}, "    // price
       "{}, "    // stop_price
@@ -49,7 +49,7 @@ std::string CreateOrder::get_fields() const {
       order_type_,
       time_in_force_,
       execution_instructions_,
-      order_template_,
+      request_template_,
       quantity_,
       price_,
       stop_price_,
@@ -67,7 +67,7 @@ size_t CreateOrder::operator()(roq::CreateOrder const &create_order) {
   order_type_.append(create_order.order_type);
   time_in_force_.append(create_order.time_in_force);
   execution_instructions_.append(create_order.execution_instructions);
-  order_template_.append(create_order.order_template);
+  request_template_.append(create_order.request_template);
   quantity_.append(create_order.quantity);
   price_.append(create_order.price);
   stop_price_.append(create_order.stop_price);
@@ -86,7 +86,7 @@ void CreateOrder::append(third_party::clickhouse::Block &block) {
   order_type_.append(block);
   time_in_force_.append(block);
   execution_instructions_.append(block);
-  order_template_.append(block);
+  request_template_.append(block);
   quantity_.append(block);
   price_.append(block);
   stop_price_.append(block);
@@ -104,7 +104,7 @@ void CreateOrder::clear() {
   order_type_.clear();
   time_in_force_.clear();
   execution_instructions_.clear();
-  order_template_.clear();
+  request_template_.clear();
   quantity_.clear();
   price_.clear();
   stop_price_.clear();

@@ -32,6 +32,7 @@ struct ModifyOrder final {
  private:
   Column<std::string_view, true> account_;
   Column<uint32_t> order_id_;
+  Column<std::string_view, true> request_template_;
   Column<double> quantity_;
   Column<double> price_;
   Column<std::string_view> routing_id_;

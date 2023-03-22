@@ -40,7 +40,7 @@ struct CreateOrder final {
   Column<OrderType, true> order_type_;
   Column<TimeInForce, true> time_in_force_;
   Column<Mask<ExecutionInstruction>> execution_instructions_;
-  Column<std::string_view, true> order_template_;
+  Column<std::string_view, true> request_template_;
   Column<double> quantity_;
   Column<double> price_;
   Column<double> stop_price_;
