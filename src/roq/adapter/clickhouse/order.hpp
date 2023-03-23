@@ -41,7 +41,6 @@ struct Order final {
   Column<OrderType, true> order_type_;
   Column<TimeInForce, true> time_in_force_;
   Column<Mask<ExecutionInstruction>> execution_instructions_;
-  Column<std::string_view> order_template_;
   Column<std::chrono::nanoseconds> create_time_utc_;
   Column<std::chrono::nanoseconds> update_time_utc_;
   Column<std::string_view, true> external_account_;

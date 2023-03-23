@@ -18,14 +18,13 @@ Order::Order()
     : stream_id_{"stream_id"}, account_{"account"}, order_id_{"order_id"}, exchange_{"exchange"}, symbol_{"symbol"},
       side_{"side"}, position_effect_{"position_effect"}, max_show_quantity_{"max_show_quantity"},
       order_type_{"order_type"}, time_in_force_{"time_in_force"}, execution_instructions_{"execution_instructions"},
-      order_template_{"order_template"}, create_time_utc_{"create_time_utc"}, update_time_utc_{"update_time_utc"},
-      external_account_{"external_account"}, external_order_id_{"external_order_id"}, status_{"status"},
-      quantity_{"quantity"}, price_{"price"}, stop_price_{"stop_price"}, remaining_quantity_{"remaining_quantity"},
-      traded_quantity_{"traded_quantity"}, average_traded_price_{"average_traded_price"},
-      last_traded_quantity_{"last_traded_quantity"}, last_traded_price_{"last_traded_price"},
-      last_liquidity_{"last_liquidity"}, routing_id_{"routing_id"}, max_request_version_{"max_request_version"},
-      max_response_version_{"max_response_version"}, max_accepted_version_{"max_accepted_version"}, update_type_{
-                                                                                                        "update_type"} {
+      create_time_utc_{"create_time_utc"}, update_time_utc_{"update_time_utc"}, external_account_{"external_account"},
+      external_order_id_{"external_order_id"}, status_{"status"}, quantity_{"quantity"}, price_{"price"},
+      stop_price_{"stop_price"}, remaining_quantity_{"remaining_quantity"}, traded_quantity_{"traded_quantity"},
+      average_traded_price_{"average_traded_price"}, last_traded_quantity_{"last_traded_quantity"},
+      last_traded_price_{"last_traded_price"}, last_liquidity_{"last_liquidity"}, routing_id_{"routing_id"},
+      max_request_version_{"max_request_version"}, max_response_version_{"max_response_version"},
+      max_accepted_version_{"max_accepted_version"}, update_type_{"update_type"} {
 }
 
 std::string Order::get_fields() const {
@@ -41,7 +40,6 @@ std::string Order::get_fields() const {
       "{}, "    // order_type
       "{}, "    // time_in_force
       "{}, "    // execution_instructions
-      "{}, "    // order_template
       "{}, "    // create_time_utc
       "{}, "    // update_time_utc
       "{}, "    // external_account
@@ -72,7 +70,6 @@ std::string Order::get_fields() const {
       order_type_,
       time_in_force_,
       execution_instructions_,
-      order_template_,
       create_time_utc_,
       update_time_utc_,
       external_account_,
@@ -106,7 +103,6 @@ size_t Order::operator()(roq::OrderUpdate const &order_update) {
   order_type_.append(order_update.order_type);
   time_in_force_.append(order_update.time_in_force);
   execution_instructions_.append(order_update.execution_instructions);
-  order_template_.append(order_update.order_template);
   create_time_utc_.append(order_update.create_time_utc);
   update_time_utc_.append(order_update.update_time_utc);
   external_account_.append(order_update.external_account);
@@ -141,7 +137,6 @@ void Order::append(third_party::clickhouse::Block &block) {
   order_type_.append(block);
   time_in_force_.append(block);
   execution_instructions_.append(block);
-  order_template_.append(block);
   create_time_utc_.append(block);
   update_time_utc_.append(block);
   external_account_.append(block);
@@ -175,7 +170,6 @@ void Order::clear() {
   order_type_.clear();
   time_in_force_.clear();
   execution_instructions_.clear();
-  order_template_.clear();
   create_time_utc_.clear();
   update_time_utc_.clear();
   external_account_.clear();
