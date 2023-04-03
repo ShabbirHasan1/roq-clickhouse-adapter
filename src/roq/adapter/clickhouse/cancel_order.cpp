@@ -15,8 +15,8 @@ namespace clickhouse {
 // === IMPLEMENTATION ===
 
 CancelOrder::CancelOrder()
-    : account_{"account"}, order_id_{"order_id"}, request_template_{"request_template"},
-      routing_id_{"routing_id"}, version_{"version"}, conditional_on_version_{"conditional_on_version"} {
+    : account_{"account"}, order_id_{"order_id"}, request_template_{"request_template"}, routing_id_{"routing_id"},
+      version_{"version"}, conditional_on_version_{"conditional_on_version"} {
 }
 
 std::string CancelOrder::get_fields() const {
