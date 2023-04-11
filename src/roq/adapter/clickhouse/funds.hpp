@@ -36,6 +36,9 @@ struct Funds final {
   Column<double> balance_;
   Column<double> hold_;
   Column<std::string_view, true> external_account_;
+  Column<UpdateType, true> update_type_;
+  Column<std::chrono::nanoseconds> exchange_time_utc_;
+  Column<std::chrono::nanoseconds> sending_time_utc_;
 };
 
 }  // namespace clickhouse

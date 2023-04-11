@@ -43,6 +43,7 @@ struct Trade final {
   Column<std::string_view> external_order_id_;
   Column<std::string_view> routing_id_;
   Column<UpdateType, true> update_type_;
+  Column<std::chrono::nanoseconds> sending_time_utc_;
 };
 
 }  // namespace clickhouse

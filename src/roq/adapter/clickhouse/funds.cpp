@@ -16,7 +16,8 @@ namespace clickhouse {
 
 Funds::Funds()
     : stream_id_{"stream_id"}, account_{"account"}, currency_{"currency"}, balance_{"balance"}, hold_{"hold"},
-      external_account_{"external_account"} {
+      external_account_{"external_account"}, update_type_{"update_type"}, exchange_time_utc_{"exchange_time_utc"},
+      sending_time_utc_{"sending_time_utc"} {
 }
 
 std::string Funds::get_fields() const {
@@ -26,13 +27,19 @@ std::string Funds::get_fields() const {
       "{}, "    // currency
       "{}, "    // balance
       "{}, "    // hold
-      "{}"_cf,  // external_account
+      "{}, "    // external_account
+      "{}, "    // update_type
+      "{}, "    // exchange_time_utc
+      "{}"_cf,  // sending_time_utc
       stream_id_,
       account_,
       currency_,
       balance_,
       hold_,
-      external_account_);
+      external_account_,
+      update_type_,
+      exchange_time_utc_,
+      sending_time_utc_);
 }
 
 size_t Funds::operator()(roq::FundsUpdate const &funds_update) {
@@ -42,6 +49,9 @@ size_t Funds::operator()(roq::FundsUpdate const &funds_update) {
   balance_.append(funds_update.balance);
   hold_.append(funds_update.hold);
   external_account_.append(funds_update.external_account);
+  update_type_.append(funds_update.update_type);
+  exchange_time_utc_.append(funds_update.exchange_time_utc);
+  sending_time_utc_.append(funds_update.sending_time_utc);
   return 1;
 }
 
@@ -52,6 +62,9 @@ void Funds::append(third_party::clickhouse::Block &block) {
   balance_.append(block);
   hold_.append(block);
   external_account_.append(block);
+  update_type_.append(block);
+  exchange_time_utc_.append(block);
+  sending_time_utc_.append(block);
 }
 
 void Funds::clear() {
@@ -61,6 +74,9 @@ void Funds::clear() {
   balance_.clear();
   hold_.clear();
   external_account_.clear();
+  update_type_.clear();
+  exchange_time_utc_.clear();
+  sending_time_utc_.clear();
 }
 
 }  // namespace clickhouse

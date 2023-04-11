@@ -17,7 +17,7 @@ namespace clickhouse {
 Position::Position()
     : stream_id_{"stream_id"}, account_{"account"}, exchange_{"exchange"}, symbol_{"symbol"},
       external_account_{"external_account"}, long_quantity_{"long_quantity"}, short_quantity_{"short_quantity"},
-      long_quantity_begin_{"long_quantity_begin"}, short_quantity_begin_{"short_quantity_begin"} {
+      update_type_{"update_type"}, exchange_time_utc_{"exchange_time_utc"}, sending_time_utc_{"sending_time_utc"} {
 }
 
 std::string Position::get_fields() const {
@@ -29,8 +29,9 @@ std::string Position::get_fields() const {
       "{}, "    // external_account
       "{}, "    // long_quantity
       "{}, "    // short_quantity
-      "{}, "    // long_quantity_begin
-      "{}"_cf,  // short_quantity_begin
+      "{}, "    // update_type
+      "{}, "    // exchange_time_utc
+      "{}"_cf,  // sending_time_utc
       stream_id_,
       account_,
       exchange_,
@@ -38,8 +39,9 @@ std::string Position::get_fields() const {
       external_account_,
       long_quantity_,
       short_quantity_,
-      long_quantity_begin_,
-      short_quantity_begin_);
+      update_type_,
+      exchange_time_utc_,
+      sending_time_utc_);
 }
 
 size_t Position::operator()(roq::PositionUpdate const &position_update) {
@@ -50,8 +52,9 @@ size_t Position::operator()(roq::PositionUpdate const &position_update) {
   external_account_.append(position_update.external_account);
   long_quantity_.append(position_update.long_quantity);
   short_quantity_.append(position_update.short_quantity);
-  long_quantity_begin_.append(position_update.long_quantity_begin);
-  short_quantity_begin_.append(position_update.short_quantity_begin);
+  update_type_.append(position_update.update_type);
+  exchange_time_utc_.append(position_update.exchange_time_utc);
+  sending_time_utc_.append(position_update.sending_time_utc);
   return 1;
 }
 
@@ -63,8 +66,9 @@ void Position::append(third_party::clickhouse::Block &block) {
   external_account_.append(block);
   long_quantity_.append(block);
   short_quantity_.append(block);
-  long_quantity_begin_.append(block);
-  short_quantity_begin_.append(block);
+  update_type_.append(block);
+  exchange_time_utc_.append(block);
+  sending_time_utc_.append(block);
 }
 
 void Position::clear() {
@@ -75,8 +79,9 @@ void Position::clear() {
   external_account_.clear();
   long_quantity_.clear();
   short_quantity_.clear();
-  long_quantity_begin_.clear();
-  short_quantity_begin_.clear();
+  update_type_.clear();
+  exchange_time_utc_.clear();
+  sending_time_utc_.clear();
 }
 
 }  // namespace clickhouse

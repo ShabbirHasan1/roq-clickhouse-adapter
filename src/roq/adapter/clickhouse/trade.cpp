@@ -18,7 +18,8 @@ Trade::Trade()
     : stream_id_{"stream_id"}, account_{"account"}, order_id_{"order_id"}, exchange_{"exchange"}, symbol_{"symbol"},
       side_{"side"}, position_effect_{"position_effect"}, create_time_utc_{"create_time_utc"},
       update_time_utc_{"update_time_utc"}, external_account_{"external_account"},
-      external_order_id_{"external_order_id"}, routing_id_{"routing_id"}, update_type_{"update_type"} {
+      external_order_id_{"external_order_id"}, routing_id_{"routing_id"}, update_type_{"update_type"},
+      sending_time_utc_{"sending_time_utc"} {
 }
 
 std::string Trade::get_fields() const {
@@ -35,7 +36,8 @@ std::string Trade::get_fields() const {
       "{}, "    // external_account
       "{}, "    // external_order_id
       "{}, "    // routing_id
-      "{}"_cf,  // update_type
+      "{}, "    // update_type
+      "{}"_cf,  // sending_time_utc
       stream_id_,
       account_,
       order_id_,
@@ -48,7 +50,8 @@ std::string Trade::get_fields() const {
       external_account_,
       external_order_id_,
       routing_id_,
-      update_type_);
+      update_type_,
+      sending_time_utc_);
 }
 
 size_t Trade::operator()(roq::TradeUpdate const &trade_update) {
@@ -65,6 +68,7 @@ size_t Trade::operator()(roq::TradeUpdate const &trade_update) {
   external_order_id_.append(trade_update.external_order_id);
   routing_id_.append(trade_update.routing_id);
   update_type_.append(trade_update.update_type);
+  sending_time_utc_.append(trade_update.sending_time_utc);
   return 1;
 }
 
@@ -82,6 +86,7 @@ void Trade::append(third_party::clickhouse::Block &block) {
   external_order_id_.append(block);
   routing_id_.append(block);
   update_type_.append(block);
+  sending_time_utc_.append(block);
 }
 
 void Trade::clear() {
@@ -98,6 +103,7 @@ void Trade::clear() {
   external_order_id_.clear();
   routing_id_.clear();
   update_type_.clear();
+  sending_time_utc_.clear();
 }
 
 }  // namespace clickhouse

@@ -37,8 +37,9 @@ struct Position final {
   Column<std::string_view, true> external_account_;
   Column<double> long_quantity_;
   Column<double> short_quantity_;
-  Column<double> long_quantity_begin_;
-  Column<double> short_quantity_begin_;
+  Column<UpdateType, true> update_type_;
+  Column<std::chrono::nanoseconds> exchange_time_utc_;
+  Column<std::chrono::nanoseconds> sending_time_utc_;
 };
 
 }  // namespace clickhouse

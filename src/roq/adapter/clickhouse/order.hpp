@@ -60,6 +60,7 @@ struct Order final {
   Column<uint32_t> max_response_version_;
   Column<uint32_t> max_accepted_version_;
   Column<UpdateType, true> update_type_;
+  Column<std::chrono::nanoseconds> sending_time_utc_;
 };
 
 }  // namespace clickhouse

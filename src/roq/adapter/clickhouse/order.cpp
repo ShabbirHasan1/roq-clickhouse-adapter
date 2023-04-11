@@ -24,7 +24,8 @@ Order::Order()
       average_traded_price_{"average_traded_price"}, last_traded_quantity_{"last_traded_quantity"},
       last_traded_price_{"last_traded_price"}, last_liquidity_{"last_liquidity"}, routing_id_{"routing_id"},
       max_request_version_{"max_request_version"}, max_response_version_{"max_response_version"},
-      max_accepted_version_{"max_accepted_version"}, update_type_{"update_type"} {
+      max_accepted_version_{"max_accepted_version"}, update_type_{"update_type"},
+      sending_time_utc_{"sending_time_utc"} {
 }
 
 std::string Order::get_fields() const {
@@ -58,7 +59,8 @@ std::string Order::get_fields() const {
       "{}, "    // max_request_version
       "{}, "    // max_response_version
       "{}, "    // max_accepted_version
-      "{}"_cf,  // update_type
+      "{}, "    // update_type
+      "{}"_cf,  // sending_time_utc
       stream_id_,
       account_,
       order_id_,
@@ -88,7 +90,8 @@ std::string Order::get_fields() const {
       max_request_version_,
       max_response_version_,
       max_accepted_version_,
-      update_type_);
+      update_type_,
+      sending_time_utc_);
 }
 
 size_t Order::operator()(roq::OrderUpdate const &order_update) {
@@ -122,6 +125,7 @@ size_t Order::operator()(roq::OrderUpdate const &order_update) {
   max_response_version_.append(order_update.max_response_version);
   max_accepted_version_.append(order_update.max_accepted_version);
   update_type_.append(order_update.update_type);
+  sending_time_utc_.append(order_update.sending_time_utc);
   return 1;
 }
 
@@ -156,6 +160,7 @@ void Order::append(third_party::clickhouse::Block &block) {
   max_response_version_.append(block);
   max_accepted_version_.append(block);
   update_type_.append(block);
+  sending_time_utc_.append(block);
 }
 
 void Order::clear() {
@@ -189,6 +194,7 @@ void Order::clear() {
   max_response_version_.clear();
   max_accepted_version_.clear();
   update_type_.clear();
+  sending_time_utc_.clear();
 }
 
 }  // namespace clickhouse
