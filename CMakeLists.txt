@@ -41,6 +41,9 @@ find_package(roq-logging REQUIRED)
 
 find_package(ClickHouse_CPP REQUIRED)
 
+find_library(LZ4_LIBRARIES lz4 REQUIRED)
+find_library(CITYHASH_LIBRARIES cityhash REQUIRED)
+
 # include
 
 include_directories("${CMAKE_SOURCE_DIR}/src")

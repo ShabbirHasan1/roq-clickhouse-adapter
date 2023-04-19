@@ -38,6 +38,8 @@ target_link_libraries(
           fmt::fmt
           absl::flags
           ${CLICKHOUSE_CPP_LIBRARIES}
+          ${CITYHASH_LIBRARIES}
+          ${LZ4_LIBRARIES}
           ${UUID_LIBRARIES})
 
 set_target_properties("${TARGET_NAME}" PROPERTIES LINK_FLAGS_RELEASE -s)

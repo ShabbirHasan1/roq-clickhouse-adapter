@@ -6,7 +6,7 @@ source:
   git_url: ..
 
 build:
-  skip: True  # [win and osx]
+  skip: True  # [not linux64]
   number: {{ ROQ_BUILD_NUMBER if ROQ_BUILD_NUMBER is defined else GIT_DESCRIBE_NUMBER }}
   script_env:
     - ROQ_BUILD_NUMBER
@@ -20,12 +20,14 @@ requirements:
     - cmake
     - make
   host:
-    - roq-adapter
-    - roq-client
     - abseil-cpp
     - catch2  # [linux]
+    - roq-adapter
+    - roq-client
     - roq-oss-catch2  # [osx]
+    - roq-oss-cityhash
     - roq-oss-clickhouse-cpp
+    - roq-oss-lz4
     - roq-oss-magic_enum
 
 about:
