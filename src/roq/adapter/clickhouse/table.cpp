@@ -4,10 +4,7 @@
 
 #include "roq/logging.hpp"
 
-#include "roq/adapter/clickhouse/flags/flags.hpp"
-
 using namespace std::literals;
-
 using namespace fmt::literals;
 
 namespace roq {
@@ -17,25 +14,25 @@ namespace clickhouse {
 // === HELPERS ===
 
 namespace detail {
-std::string create_table_name(std::string_view const &table_name) {
-  return fmt::format("{}.{}"_cf, flags::Flags::database(), table_name);  // prefix database name
+std::string create_table_name(Settings const &settings, std::string_view const &table_name) {
+  return fmt::format("{}.{}"_cf, settings.database, table_name);  // prefix database name
 }
 
-bool is_full(size_t rows) {
-  return flags::Flags::max_rows() <= rows;
+bool is_full(Settings const &settings, size_t rows) {
+  return settings.max_rows <= rows;
 }
 
 // note!
 // this strategy is based on keeping tables relatively in sync
 // we don't want to flush all the time so we allow for some slack and only
 // force table flush when its last update is far away from current update
-bool sync(size_t last_update, size_t current) {
+bool sync(Settings const &settings, size_t last_update, size_t current) {
   if (!last_update)
     return false;
   if (current < last_update)  // overflow
     return true;
   constexpr size_t factor = 1;
-  return (flags::Flags::max_rows() * factor) <= (current - last_update);
+  return (settings.max_rows * factor) <= (current - last_update);
 }
 }  // namespace detail
 

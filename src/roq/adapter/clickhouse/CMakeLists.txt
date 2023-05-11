@@ -19,6 +19,7 @@ set(SOURCES
     order.cpp
     position.cpp
     reference_data.cpp
+    settings.cpp
     statistics.cpp
     stream_status.cpp
     table.cpp

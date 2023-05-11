@@ -8,15 +8,16 @@
 #include "roq/third_party/clickhouse/client.hpp"
 
 #include "roq/adapter/clickhouse/columns.hpp"
+#include "roq/adapter/clickhouse/settings.hpp"
 
 namespace roq {
 namespace adapter {
 namespace clickhouse {
 
 namespace detail {
-extern std::string create_table_name(std::string_view const &table_name);
-extern bool is_full(size_t rows);
-extern bool sync(size_t last_update, size_t current);
+extern std::string create_table_name(Settings const &settings, std::string_view const &table_name);
+extern bool is_full(Settings const &, size_t rows);
+extern bool sync(Settings const &, size_t last_update, size_t current);
 
 struct Common {
   Common();
@@ -45,7 +46,8 @@ struct Common {
 
 template <typename T>
 struct Table {
-  Table() : table_name_(detail::create_table_name(T::table_name)) {}
+  explicit Table(Settings const &settings)
+      : settings_{settings}, table_name_(detail::create_table_name(settings, T::table_name)) {}
 
   void create_table(third_party::clickhouse::Client &client) {
     common_.create_table(client, table_name_, table_.get_fields(), table_.get_index_fields());
@@ -57,11 +59,11 @@ struct Table {
     common_(message_info, gateway, rows);
     counter_ = counter;
     rows_ += rows;
-    return detail::is_full(rows_);
+    return detail::is_full(settings_, rows_);
   }
 
   void flush(third_party::clickhouse::Client &client, uint64_t counter, bool force = false) {
-    if (force || detail::is_full(rows_) || detail::sync(counter_, counter)) {
+    if (force || detail::is_full(settings_, rows_) || detail::sync(settings_, counter_, counter)) {
       third_party::clickhouse::Block block;
       common_.append(block);
       table_.append(block);
@@ -74,7 +76,8 @@ struct Table {
   }
 
  private:
-  const std::string table_name_;
+  Settings const &settings_;
+  std::string const table_name_;
   detail::Common common_;
   T table_;
   size_t rows_ = {};

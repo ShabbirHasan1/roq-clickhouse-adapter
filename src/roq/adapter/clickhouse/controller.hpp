@@ -11,6 +11,8 @@
 
 #include "roq/third_party/clickhouse/client.hpp"
 
+#include "roq/adapter/clickhouse/settings.hpp"
+
 // tables
 
 #include "roq/adapter/clickhouse/cancel_order.hpp"
@@ -38,7 +40,7 @@ namespace adapter {
 namespace clickhouse {
 
 struct Controller final : public adapter::Handler {
-  Controller();
+  explicit Controller(Settings const &);
 
   Controller(Controller const &) = delete;
   Controller(Controller &&) = delete;
@@ -91,7 +93,8 @@ struct Controller final : public adapter::Handler {
   void insert_processed(Category, const UUID &);
 
  private:
-  const std::unique_ptr<adapter::Dispatcher> dispatcher_;
+  std::unique_ptr<adapter::Dispatcher> const dispatcher_;
+  Settings const &settings_;
   // event-logs
   absl::flat_hash_map<Category, absl::flat_hash_set<UUID>> processed_;
   absl::flat_hash_map<Category, absl::flat_hash_map<UUID, std::string>> feeds_;

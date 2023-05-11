@@ -9,10 +9,7 @@
 
 #include "roq/adapter/clickhouse/utils.hpp"
 
-#include "roq/adapter/clickhouse/flags/flags.hpp"
-
 using namespace std::literals;
-
 using namespace fmt::literals;
 
 namespace roq {
@@ -22,10 +19,10 @@ namespace clickhouse {
 // === HELPERS ===
 
 namespace {
-auto create_client() {
+auto create_client(auto &settings) {
   third_party::clickhouse::ClientOptions options;
-  options.SetHost(std::string{flags::Flags::db_host()});
-  options.SetPort(flags::Flags::db_port());
+  options.SetHost(std::string{settings.db_host});
+  options.SetPort(settings.db_port);
   // XXX should be flags
   options.SetSendRetries(3);
   options.SetRetryTimeout(5s);
@@ -36,7 +33,13 @@ auto create_client() {
 
 // === IMPLEMENTATION ===
 
-Controller::Controller() : dispatcher_{adapter::Factory::create(*this)}, client_{create_client()} {
+Controller::Controller(Settings const &settings)
+    : dispatcher_{adapter::Factory::create(*this, settings)}, settings_{settings}, client_{create_client(settings)},
+      gateway_settings_{settings}, stream_status_{settings}, external_latency_{settings}, gateway_status_{settings},
+      reference_data_{settings}, market_status_{settings}, top_of_book_{settings}, market_by_price_{settings},
+      trade_summary_{settings}, statistics_{settings}, create_order_{settings}, modify_order_{settings},
+      cancel_order_{settings}, order_ack_{settings}, order_{settings}, trade_{settings}, position_{settings},
+      funds_{settings}, custom_metrics_{settings} {
   create_database();
   // completely processed event-logs (to avoid redundant inserts)
   create_processed_table();
@@ -219,7 +222,7 @@ void Controller::flush(bool force) {
 }
 
 void Controller::create_database() {
-  auto query = fmt::format("CREATE DATABASE IF NOT EXISTS {}"_cf, flags::Flags::database());
+  auto query = fmt::format("CREATE DATABASE IF NOT EXISTS {}"_cf, settings_.database);
   client_.Execute(query);
 }
 
@@ -231,12 +234,12 @@ void Controller::create_processed_table() {
       ") "
       "ENGINE = ReplacingMergeTree() "
       "ORDER BY (session_id)"_cf,
-      flags::Flags::database());
+      settings_.database);
   client_.Execute(query);
 }
 
 void Controller::load_processed_table() {
-  auto query = fmt::format("SELECT category, session_id FROM {}.processed"_cf, flags::Flags::database());
+  auto query = fmt::format("SELECT category, session_id FROM {}.processed"_cf, settings_.database);
   client_.Select(query, [this](auto &block) {
     if (block.GetRowCount() == 0)
       return;
@@ -261,7 +264,7 @@ void Controller::insert_processed(Category category, const UUID &session_id) {
   third_party::clickhouse::Block block;
   block.AppendColumn("category"s, category_);
   block.AppendColumn("session_id"s, session_id_);
-  auto table_name = fmt::format("{}.processed"_cf, flags::Flags::database());
+  auto table_name = fmt::format("{}.processed"_cf, settings_.database);
   client_.Insert(table_name, block);
 }
 
