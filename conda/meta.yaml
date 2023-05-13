@@ -22,6 +22,7 @@ requirements:
   host:
     - abseil-cpp
     - catch2  # [linux]
+    - fmt
     - roq-adapter
     - roq-client
     - roq-oss-catch2  # [osx]
