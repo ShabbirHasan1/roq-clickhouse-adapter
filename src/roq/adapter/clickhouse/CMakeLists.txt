@@ -34,6 +34,7 @@ target_link_libraries(
   "${TARGET_NAME}"
   PRIVATE "${TARGET_NAME}-flags"
           roq-adapter::roq-adapter
+          roq-adapter::roq-adapter-flags
           roq-logging::roq-logging
           roq-api::roq-api
           fmt::fmt
