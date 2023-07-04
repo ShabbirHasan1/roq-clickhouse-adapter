@@ -2,6 +2,9 @@
 
 #include "roq/adapter/clickhouse/application.hpp"
 
+#include "roq/logging/flags/parser.hpp"
+#include "roq/logging/flags/settings.hpp"
+
 using namespace std::literals;
 
 // === CONSTANTS ===
@@ -20,5 +23,7 @@ auto const INFO = roq::Service::Info{
 // === IMPLEMENTATION ===
 
 int main(int argc, char **argv) {
-  return roq::adapter::clickhouse::Application{argc, argv, INFO}.run();
+  roq::logging::flags::Parser parser{argc, argv, INFO.description, INFO.build_version};
+  auto settings = roq::logging::flags::create_settings();
+  return roq::adapter::clickhouse::Application{parser, settings, INFO}.run();
 }
