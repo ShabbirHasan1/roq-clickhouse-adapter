@@ -5,14 +5,14 @@
 #include <fmt/compile.h>
 #include <fmt/format.h>
 
-#include "roq/adapter/settings.hpp"
+#include "roq/adapter/flags/settings.hpp"
 
 namespace roq {
 namespace adapter {
 namespace clickhouse {
 
-struct Settings final : public adapter::Settings {
-  Settings();
+struct Settings final : public adapter::flags::Settings {
+  explicit Settings(args::Parser const &);
 
   std::string_view const db_host;
   uint16_t const db_port = {};

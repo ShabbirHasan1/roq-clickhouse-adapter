@@ -19,7 +19,7 @@ int Application::main(args::Parser const &args) {
   auto params = args.params();
   if (!std::empty(params))
     log::fatal("Connecting to gateway(s) not yet supported"sv);
-  Settings settings;
+  Settings settings{args};
   Controller{settings}.dispatch();
   return EXIT_SUCCESS;
 }
