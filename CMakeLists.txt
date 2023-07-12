@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 
 # cmake
 
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
 
 # version (using git tag)
 
@@ -47,11 +47,11 @@ find_library(CITYHASH_LIBRARIES cityhash REQUIRED)
 
 # include
 
-include_directories("${CMAKE_SOURCE_DIR}/src")
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
 # sub-projects
 
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/src/roq/adapter/clickhouse")
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/roq/adapter/clickhouse)
 
 # test
 
@@ -60,4 +60,4 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 
 find_package(Catch2 REQUIRED)
-add_subdirectory("${CMAKE_SOURCE_DIR}/test")
+add_subdirectory(${CMAKE_SOURCE_DIR}/test)

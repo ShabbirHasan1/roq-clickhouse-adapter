@@ -1,4 +1,4 @@
-set(TARGET_NAME "${PROJECT_NAME}")
+set(TARGET_NAME ${PROJECT_NAME})
 
 add_subdirectory(flags)
 
@@ -28,11 +28,11 @@ set(SOURCES
     trade_summary.cpp
     main.cpp)
 
-add_executable("${TARGET_NAME}" ${SOURCES})
+add_executable(${TARGET_NAME} ${SOURCES})
 
 target_link_libraries(
-  "${TARGET_NAME}"
-  PRIVATE "${TARGET_NAME}-flags"
+  ${TARGET_NAME}
+  PRIVATE ${TARGET_NAME}-flags
           roq-adapter::roq-adapter
           roq-adapter::roq-adapter-flags
           roq-logging::roq-logging
@@ -46,10 +46,10 @@ target_link_libraries(
           ${LZ4_LIBRARIES}
           ${UUID_LIBRARIES})
 
-set_target_properties("${TARGET_NAME}" PROPERTIES LINK_FLAGS_RELEASE -s)
+set_target_properties(${TARGET_NAME} PROPERTIES LINK_FLAGS_RELEASE -s)
 
 target_compile_definitions(
-  "${TARGET_NAME}"
+  ${TARGET_NAME}
   PRIVATE ROQ_PACKAGE_NAME="${TARGET_NAME}" ROQ_BUILD_VERSION="${GIT_REPO_VERSION}"
           ROQ_GIT_DESCRIBE_HASH="${GIT_DESCRIBE_HASH}" ROQ_BUILD_NUMBER="${ROQ_BUILD_NUMBER}"
           ROQ_BUILD_TYPE="${ROQ_BUILD_TYPE}")
