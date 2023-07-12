@@ -12,7 +12,7 @@ struct Application final : public roq::Service {
   using roq::Service::Service;
 
  protected:
-  int main(int argc, char **argv) override;
+  int main(args::Parser const &) override;
 };
 
 }  // namespace clickhouse

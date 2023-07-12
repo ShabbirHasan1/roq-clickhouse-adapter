@@ -25,6 +25,7 @@ requirements:
     - fmt
     - roq-adapter
     - roq-client
+    - roq-flags
     - roq-oss-catch2  # [osx]
     - roq-oss-cityhash
     - roq-oss-clickhouse-cpp

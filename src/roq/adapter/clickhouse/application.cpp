@@ -15,8 +15,9 @@ namespace clickhouse {
 
 // === IMPLEMENTATION ===
 
-int Application::main(int argc, [[maybe_unused]] char **argv) {
-  if (argc > 1)
+int Application::main(args::Parser const &args) {
+  auto params = args.params();
+  if (!std::empty(params))
     log::fatal("Connecting to gateway(s) not yet supported"sv);
   Settings settings;
   Controller{settings}.dispatch();
