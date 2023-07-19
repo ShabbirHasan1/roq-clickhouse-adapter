@@ -40,7 +40,6 @@ target_link_libraries(
           roq-flags::roq-flags
           roq-api::roq-api
           fmt::fmt
-          absl::flags
           ${CLICKHOUSE_CPP_LIBRARIES}
           ${CITYHASH_LIBRARIES}
           ${LZ4_LIBRARIES}
