@@ -31,7 +31,7 @@ struct CreateOrder final {
 
  private:
   Column<std::string_view, true> account_;
-  Column<uint32_t> order_id_;
+  Column<uint64_t> order_id_;
   Column<std::string_view, true> exchange_;
   Column<std::string_view, true> symbol_;
   Column<Side, true> side_;
