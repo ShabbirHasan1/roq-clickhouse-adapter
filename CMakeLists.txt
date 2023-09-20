@@ -47,6 +47,14 @@ find_package(ClickHouse_CPP REQUIRED)
 find_library(LZ4_LIBRARIES lz4 REQUIRED)
 find_library(CITYHASH_LIBRARIES cityhash REQUIRED)
 
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+  include(CTest)
+endif()
+
+if(BUILD_TESTING)
+  find_package(Catch2 REQUIRED)
+endif()
+
 # include
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
@@ -54,12 +62,3 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 # sub-projects
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/roq/adapter/clickhouse)
-
-# test
-
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
-  include(CTest)
-endif()
-
-find_package(Catch2 REQUIRED)
-add_subdirectory(${CMAKE_SOURCE_DIR}/test)
