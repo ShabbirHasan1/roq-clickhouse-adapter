@@ -21,14 +21,13 @@ project(roq-clickhouse-adapter VERSION ${GIT_REPO_VERSION})
 # dependencies
 
 find_package(absl REQUIRED)
+find_package(ClickHouse_CPP REQUIRED)
 find_package(fmt REQUIRED)
 find_package(roq-adapter REQUIRED)
 find_package(roq-api REQUIRED)
 find_package(roq-flags REQUIRED)
 find_package(roq-io REQUIRED)
 find_package(roq-logging REQUIRED)
-
-find_package(ClickHouse_CPP REQUIRED)
 
 find_library(LZ4_LIBRARIES lz4 REQUIRED)
 find_library(CITYHASH_LIBRARIES cityhash REQUIRED)

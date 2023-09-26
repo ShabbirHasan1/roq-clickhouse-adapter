@@ -46,8 +46,7 @@ target_link_libraries(
           fmt::fmt
           ${CLICKHOUSE_CPP_LIBRARIES}
           ${CITYHASH_LIBRARIES}
-          ${LZ4_LIBRARIES}
-          ${UUID_LIBRARIES})
+          ${LZ4_LIBRARIES})
 
 if(ROQ_BUILD_TYPE STREQUAL "Release")
   set_target_properties(${TARGET_NAME} PROPERTIES LINK_FLAGS_RELEASE -s)
