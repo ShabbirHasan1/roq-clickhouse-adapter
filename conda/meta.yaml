@@ -27,9 +27,7 @@ requirements:
     - roq-client
     - roq-flags
     - roq-oss-catch2  # [osx]
-    - roq-oss-cityhash
     - roq-oss-clickhouse-cpp
-    - roq-oss-lz4
     - roq-oss-magic_enum
 
 about:
