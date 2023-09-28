@@ -29,9 +29,6 @@ find_package(roq-flags REQUIRED)
 find_package(roq-io REQUIRED)
 find_package(roq-logging REQUIRED)
 
-find_library(LZ4_LIBRARIES lz4 REQUIRED)
-find_library(CITYHASH_LIBRARIES cityhash REQUIRED)
-
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   include(CTest)
 endif()
