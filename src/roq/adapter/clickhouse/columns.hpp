@@ -20,7 +20,7 @@ template <typename T>
 struct Meta<T, true, typename std::enable_if<std::is_enum<T>::value>::type> final {
   using value_type = T;
   using column_type = third_party::clickhouse::ColumnString;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "LowCardinality(String)"sv;
   }();
@@ -34,7 +34,7 @@ template <typename T>
 struct Meta<Mask<T>, false> final {
   using value_type = Mask<T>;
   using column_type = third_party::clickhouse::ColumnUInt64;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "UInt64"sv;
   }();
@@ -50,7 +50,7 @@ struct Meta<bool, false> final {
   // note!
   // the clickhouse-cpp library does not support boolean columns
   using column_type = third_party::clickhouse::ColumnUInt8;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "Boolean"sv;
   }();
@@ -64,7 +64,7 @@ template <>
 struct Meta<uint16_t, false> final {
   using value_type = uint16_t;
   using column_type = third_party::clickhouse::ColumnUInt16;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "UInt16"sv;
   }();
@@ -76,7 +76,7 @@ template <>
 struct Meta<uint16_t, true> final {
   using value_type = uint16_t;
   using column_type = third_party::clickhouse::ColumnUInt16;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     // note!
     // the database will reject "LowCardinality(UInt16)" for performance reasons
@@ -92,7 +92,7 @@ template <>
 struct Meta<uint32_t, false> final {
   using value_type = uint32_t;
   using column_type = third_party::clickhouse::ColumnUInt32;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "UInt32"sv;
   }();
@@ -106,7 +106,7 @@ template <>
 struct Meta<uint64_t, false> final {
   using value_type = uint64_t;
   using column_type = third_party::clickhouse::ColumnUInt64;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "UInt64"sv;
   }();
@@ -120,7 +120,7 @@ template <>
 struct Meta<double, false> final {
   using value_type = double;
   using column_type = third_party::clickhouse::ColumnFloat64;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "Float64 DEFAULT toFloat64(nan)"sv;
   }();
@@ -134,7 +134,7 @@ template <>
 struct Meta<std::chrono::nanoseconds, false> final {
   using value_type = std::chrono::nanoseconds;
   using column_type = third_party::clickhouse::ColumnDateTime64;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "DateTime(9)"sv;
   }();
@@ -154,7 +154,7 @@ template <>
 struct Meta<std::chrono::seconds, false> final {
   using value_type = std::chrono::seconds;
   using column_type = third_party::clickhouse::ColumnDateTime64;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "DateTime64(0)"sv;
   }();
@@ -174,7 +174,7 @@ template <>
 struct Meta<std::chrono::days, false> final {
   using value_type = std::chrono::seconds;
   using column_type = third_party::clickhouse::ColumnDateTime64;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "DateTime64(0)"sv;
   }();
@@ -194,7 +194,7 @@ template <>
 struct Meta<std::string_view, false> final {
   using value_type = std::string_view;
   using column_type = third_party::clickhouse::ColumnString;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "String"sv;
   }();
@@ -206,7 +206,7 @@ template <>
 struct Meta<std::string_view, true> final {
   using value_type = std::string_view;
   using column_type = third_party::clickhouse::ColumnString;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "LowCardinality(String)"sv;
   }();
@@ -220,7 +220,7 @@ template <>
 struct Meta<UUID, false> final {
   using value_type = UUID;
   using column_type = third_party::clickhouse::ColumnUUID;
-  static const constexpr auto database_type = []() {
+  static constexpr auto const database_type = []() {
     using namespace std::literals;
     return "UUID"sv;
   }();
@@ -252,7 +252,7 @@ struct Column final {
   }
 
  private:
-  const std::string name_;
+  std::string const name_;
   std::shared_ptr<typename meta_type::column_type> column_;
 };
 

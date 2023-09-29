@@ -13,7 +13,7 @@ namespace clickhouse {
 struct Trade final {
   using value_type = roq::TradeUpdate;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "trade"sv;
   }();

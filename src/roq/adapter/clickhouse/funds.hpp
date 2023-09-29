@@ -13,7 +13,7 @@ namespace clickhouse {
 struct Funds final {
   using value_type = roq::FundsUpdate;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "funds"sv;
   }();

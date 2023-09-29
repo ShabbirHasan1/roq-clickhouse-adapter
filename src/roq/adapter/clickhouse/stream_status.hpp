@@ -13,7 +13,7 @@ namespace clickhouse {
 struct StreamStatus final {
   using value_type = roq::StreamStatus;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "stream_status"sv;
   }();

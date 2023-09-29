@@ -13,7 +13,7 @@ namespace clickhouse {
 struct ReferenceData final {
   using value_type = roq::ReferenceData;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "reference_data"sv;
   }();

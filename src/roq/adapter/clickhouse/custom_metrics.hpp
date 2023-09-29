@@ -13,7 +13,7 @@ namespace clickhouse {
 struct CustomMetrics final {
   using value_type = roq::CustomMetricsUpdate;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "custom_metrics"sv;
   }();

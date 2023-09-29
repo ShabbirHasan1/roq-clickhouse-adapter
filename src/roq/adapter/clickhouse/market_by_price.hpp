@@ -13,7 +13,7 @@ namespace clickhouse {
 struct MarketByPrice final {
   using value_type = roq::MarketByPriceUpdate;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "market_by_price"sv;
   }();

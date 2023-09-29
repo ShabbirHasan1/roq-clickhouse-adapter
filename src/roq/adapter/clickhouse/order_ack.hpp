@@ -13,7 +13,7 @@ namespace clickhouse {
 struct OrderAck final {
   using value_type = roq::OrderAck;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "order_ack"sv;
   }();

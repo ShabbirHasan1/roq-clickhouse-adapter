@@ -13,7 +13,7 @@ namespace clickhouse {
 struct ExternalLatency final {
   using value_type = roq::ExternalLatency;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "external_latency"sv;
   }();

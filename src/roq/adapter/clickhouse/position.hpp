@@ -13,7 +13,7 @@ namespace clickhouse {
 struct Position final {
   using value_type = roq::PositionUpdate;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "position"sv;
   }();

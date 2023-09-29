@@ -13,7 +13,7 @@ namespace clickhouse {
 struct CreateOrder final {
   using value_type = roq::CreateOrder;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "create_order"sv;
   }();

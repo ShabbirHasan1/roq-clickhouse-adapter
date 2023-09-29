@@ -36,22 +36,22 @@ namespace clickhouse {
 namespace flags {
 
 std::string_view Flags::db_host() {
-  static const std::string result = absl::GetFlag(FLAGS_db_host);
+  static std::string const result = absl::GetFlag(FLAGS_db_host);
   return result;
 }
 
 uint16_t Flags::db_port() {
-  static const uint16_t result = absl::GetFlag(FLAGS_db_port);
+  static uint16_t const result = absl::GetFlag(FLAGS_db_port);
   return result;
 }
 
 std::string_view Flags::database() {
-  static const std::string result = absl::GetFlag(FLAGS_database);
+  static std::string const result = absl::GetFlag(FLAGS_database);
   return result;
 }
 
 uint32_t Flags::max_rows() {
-  static const uint32_t result = absl::GetFlag(FLAGS_max_rows);
+  static uint32_t const result = absl::GetFlag(FLAGS_max_rows);
   return result;
 }
 

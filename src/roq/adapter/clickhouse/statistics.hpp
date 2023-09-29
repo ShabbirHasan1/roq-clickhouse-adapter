@@ -13,7 +13,7 @@ namespace clickhouse {
 struct Statistics final {
   using value_type = roq::StatisticsUpdate;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "statistics"sv;
   }();

@@ -13,7 +13,7 @@ namespace clickhouse {
 struct ModifyOrder final {
   using value_type = roq::ModifyOrder;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "modify_order"sv;
   }();

@@ -13,7 +13,7 @@ namespace clickhouse {
 struct TopOfBook final {
   using value_type = roq::TopOfBook;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "top_of_book"sv;
   }();

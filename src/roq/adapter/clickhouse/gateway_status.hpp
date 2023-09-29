@@ -13,7 +13,7 @@ namespace clickhouse {
 struct GatewayStatus final {
   using value_type = roq::GatewayStatus;
 
-  static const constexpr auto table_name = []() {
+  static constexpr auto const table_name = []() {
     using namespace std::literals;
     return "gateway_status"sv;
   }();
