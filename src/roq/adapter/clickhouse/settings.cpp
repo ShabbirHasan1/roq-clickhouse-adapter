@@ -17,7 +17,7 @@ namespace clickhouse {
 Settings::Settings(args::Parser const &args)
     : adapter::flags::Settings{args, ROQ_PACKAGE_NAME, ROQ_BUILD_NUMBER}, db_host{flags::Flags::db_host()},
       db_port{flags::Flags::db_port()}, database{flags::Flags::database()}, max_rows{flags::Flags::max_rows()} {
-  log::debug("settings={}"sv, *this);
+  log::info("settings={}"sv, *this);
 }
 
 }  // namespace clickhouse
