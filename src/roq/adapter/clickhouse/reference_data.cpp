@@ -6,8 +6,6 @@
 
 using namespace std::literals;
 
-using namespace fmt::literals;
-
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -27,31 +25,31 @@ ReferenceData::ReferenceData()
 
 std::string ReferenceData::get_fields() const {
   return fmt::format(
-      "{}, "    // stream_id
-      "{}, "    // exchange
-      "{}, "    // symbol
-      "{}, "    // description
-      "{}, "    // security_type
-      "{}, "    // base_currency
-      "{}, "    // quote_currency
-      "{}, "    // margin_currency
-      "{}, "    // commission_currency
-      "{}, "    // tick_size
-      "{}, "    // multiplier
-      "{}, "    // min_notional
-      "{}, "    // min_trade_vol
-      "{}, "    // max_trade_vol
-      "{}, "    // trade_vol_step_size
-      "{}, "    // option_type
-      "{}, "    // strike_currency
-      "{}, "    // strike_price
-      "{}, "    // underlying
-      "{}, "    // time_zone
-      "{}, "    // issue_date
-      "{}, "    // settlement_date
-      "{}, "    // expiry_datetime
-      "{}, "    // expiry_datetime_utc
-      "{}"_cf,  // discard
+      "{}, "   // stream_id
+      "{}, "   // exchange
+      "{}, "   // symbol
+      "{}, "   // description
+      "{}, "   // security_type
+      "{}, "   // base_currency
+      "{}, "   // quote_currency
+      "{}, "   // margin_currency
+      "{}, "   // commission_currency
+      "{}, "   // tick_size
+      "{}, "   // multiplier
+      "{}, "   // min_notional
+      "{}, "   // min_trade_vol
+      "{}, "   // max_trade_vol
+      "{}, "   // trade_vol_step_size
+      "{}, "   // option_type
+      "{}, "   // strike_currency
+      "{}, "   // strike_price
+      "{}, "   // underlying
+      "{}, "   // time_zone
+      "{}, "   // issue_date
+      "{}, "   // settlement_date
+      "{}, "   // expiry_datetime
+      "{}, "   // expiry_datetime_utc
+      "{}"sv,  // discard
       stream_id_,
       exchange_,
       symbol_,

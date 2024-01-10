@@ -10,7 +10,6 @@
 #include "roq/adapter/clickhouse/utils.hpp"
 
 using namespace std::literals;
-using namespace fmt::literals;
 
 namespace roq {
 namespace adapter {
@@ -222,7 +221,7 @@ void Controller::flush(bool force) {
 }
 
 void Controller::create_database() {
-  auto query = fmt::format("CREATE DATABASE IF NOT EXISTS {}"_cf, settings_.database);
+  auto query = fmt::format("CREATE DATABASE IF NOT EXISTS {}"sv, settings_.database);
   client_.Execute(query);
 }
 
@@ -233,13 +232,13 @@ void Controller::create_processed_table() {
       "session_id UUID"
       ") "
       "ENGINE = ReplacingMergeTree() "
-      "ORDER BY (session_id)"_cf,
+      "ORDER BY (session_id)"sv,
       settings_.database);
   client_.Execute(query);
 }
 
 void Controller::load_processed_table() {
-  auto query = fmt::format("SELECT category, session_id FROM {}.processed"_cf, settings_.database);
+  auto query = fmt::format("SELECT category, session_id FROM {}.processed"sv, settings_.database);
   client_.Select(query, [this](auto &block) {
     if (block.GetRowCount() == 0)
       return;
@@ -264,7 +263,7 @@ void Controller::insert_processed(Category category, const UUID &session_id) {
   third_party::clickhouse::Block block;
   block.AppendColumn("category"s, category_);
   block.AppendColumn("session_id"s, session_id_);
-  auto table_name = fmt::format("{}.processed"_cf, settings_.database);
+  auto table_name = fmt::format("{}.processed"sv, settings_.database);
   client_.Insert(table_name, block);
 }
 

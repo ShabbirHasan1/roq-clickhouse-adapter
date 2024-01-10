@@ -6,8 +6,6 @@
 
 using namespace std::literals;
 
-using namespace fmt::literals;
-
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -24,21 +22,21 @@ CreateOrder::CreateOrder()
 
 std::string CreateOrder::get_fields() const {
   return fmt::format(
-      "{}, "    // account
-      "{}, "    // order_id
-      "{}, "    // exchange
-      "{}, "    // symbol
-      "{}, "    // side
-      "{}, "    // position_effect
-      "{}, "    // max_show_quantity
-      "{}, "    // order_type
-      "{}, "    // time_in_force
-      "{}, "    // execution_instructions
-      "{}, "    // request_template
-      "{}, "    // quantity
-      "{}, "    // price
-      "{}, "    // stop_price
-      "{}"_cf,  // routing_id
+      "{}, "   // account
+      "{}, "   // order_id
+      "{}, "   // exchange
+      "{}, "   // symbol
+      "{}, "   // side
+      "{}, "   // position_effect
+      "{}, "   // max_show_quantity
+      "{}, "   // order_type
+      "{}, "   // time_in_force
+      "{}, "   // execution_instructions
+      "{}, "   // request_template
+      "{}, "   // quantity
+      "{}, "   // price
+      "{}, "   // stop_price
+      "{}"sv,  // routing_id
       account_,
       order_id_,
       exchange_,

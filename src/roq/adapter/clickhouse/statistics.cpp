@@ -6,8 +6,6 @@
 
 using namespace std::literals;
 
-using namespace fmt::literals;
-
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -21,13 +19,13 @@ Statistics::Statistics()
 
 std::string Statistics::get_fields() const {
   return fmt::format(
-      "{}, "    // stream_id
-      "{}, "    // exchange
-      "{}, "    // symbol
-      "{}, "    // type
-      "{}, "    // value
-      "{}, "    // update_type
-      "{}"_cf,  // exchange_time_utc
+      "{}, "   // stream_id
+      "{}, "   // exchange
+      "{}, "   // symbol
+      "{}, "   // type
+      "{}, "   // value
+      "{}, "   // update_type
+      "{}"sv,  // exchange_time_utc
       stream_id_,
       exchange_,
       symbol_,
@@ -38,7 +36,7 @@ std::string Statistics::get_fields() const {
 }
 
 std::string Statistics::get_index_fields() const {
-  return fmt::format(", {}"_cf, type_.name());
+  return fmt::format(", {}"sv, type_.name());
 }
 
 size_t Statistics::operator()(roq::StatisticsUpdate const &statistics_update) {

@@ -245,10 +245,9 @@ struct Column final {
 
   void append(third_party::clickhouse::Block &block) const { block.AppendColumn(name_, column_); }
 
-  template <typename Context>
-  auto format_to(Context &context) const {
-    using namespace fmt::literals;
-    return fmt::format_to(context.out(), "{} {}"_cf, name_, meta_type::database_type);
+  auto format_to(auto &context) const {
+    using namespace std::literals;
+    return fmt::format_to(context.out(), "{} {}"sv, name_, meta_type::database_type);
   }
 
  private:
@@ -262,12 +261,8 @@ struct Column final {
 
 template <typename T, bool low_cardinality>
 struct fmt::formatter<roq::adapter::clickhouse::Column<T, low_cardinality>> {
-  template <typename Context>
-  constexpr auto parse(Context &context) {
-    return std::begin(context);
-  }
-  template <typename Context>
-  auto format(roq::adapter::clickhouse::Column<T, low_cardinality> const &value, Context &context) const {
+  constexpr auto parse(format_parse_context &context) { return std::begin(context); }
+  auto format(roq::adapter::clickhouse::Column<T, low_cardinality> const &value, format_context &context) const {
     return value.format_to(context);
   }
 };

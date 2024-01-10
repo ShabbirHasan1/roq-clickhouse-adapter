@@ -6,8 +6,6 @@
 
 using namespace std::literals;
 
-using namespace fmt::literals;
-
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -20,10 +18,10 @@ GatewayStatus::GatewayStatus()
 
 std::string GatewayStatus::get_fields() const {
   return fmt::format(
-      "{}, "    // account
-      "{}, "    // supported
-      "{}, "    // available
-      "{}"_cf,  // unavailable
+      "{}, "   // account
+      "{}, "   // supported
+      "{}, "   // available
+      "{}"sv,  // unavailable
       account_,
       supported_,
       available_,

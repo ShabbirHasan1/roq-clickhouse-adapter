@@ -6,8 +6,6 @@
 
 using namespace std::literals;
 
-using namespace fmt::literals;
-
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -24,20 +22,20 @@ Trade::Trade()
 
 std::string Trade::get_fields() const {
   return fmt::format(
-      "{}, "    // stream_id
-      "{}, "    // account
-      "{}, "    // order_id
-      "{}, "    // exchange
-      "{}, "    // symbol
-      "{}, "    // side
-      "{}, "    // position_effect
-      "{}, "    // create_time_utc
-      "{}, "    // update_time_utc
-      "{}, "    // external_account
-      "{}, "    // external_order_id
-      "{}, "    // routing_id
-      "{}, "    // update_type
-      "{}"_cf,  // sending_time_utc
+      "{}, "   // stream_id
+      "{}, "   // account
+      "{}, "   // order_id
+      "{}, "   // exchange
+      "{}, "   // symbol
+      "{}, "   // side
+      "{}, "   // position_effect
+      "{}, "   // create_time_utc
+      "{}, "   // update_time_utc
+      "{}, "   // external_account
+      "{}, "   // external_order_id
+      "{}, "   // routing_id
+      "{}, "   // update_type
+      "{}"sv,  // sending_time_utc
       stream_id_,
       account_,
       order_id_,

@@ -26,13 +26,9 @@ struct Settings final : public adapter::flags::Settings {
 
 template <>
 struct fmt::formatter<roq::adapter::clickhouse::Settings> {
-  template <typename Context>
-  constexpr auto parse(Context &context) {
-    return std::begin(context);
-  }
-  template <typename Context>
-  auto format(roq::adapter::clickhouse::Settings const &value, Context &context) const {
-    using namespace fmt::literals;
+  constexpr auto parse(format_parse_context &context) { return std::begin(context); }
+  auto format(roq::adapter::clickhouse::Settings const &value, format_context &context) const {
+    using namespace std::literals;
     return fmt::format_to(
         context.out(),
         R"({{)"
@@ -41,7 +37,7 @@ struct fmt::formatter<roq::adapter::clickhouse::Settings> {
         R"(database="{}", )"
         R"(max_rows={}, )"
         R"(adapter={})"
-        R"(}})"_cf,
+        R"(}})"sv,
         value.db_host,
         value.db_port,
         value.database,

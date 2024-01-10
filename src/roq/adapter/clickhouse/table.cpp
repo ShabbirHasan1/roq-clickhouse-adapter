@@ -5,7 +5,6 @@
 #include "roq/logging.hpp"
 
 using namespace std::literals;
-using namespace fmt::literals;
 
 namespace roq {
 namespace adapter {
@@ -15,7 +14,7 @@ namespace clickhouse {
 
 namespace detail {
 std::string create_table_name(Settings const &settings, std::string_view const &table_name) {
-  return fmt::format("{}.{}"_cf, settings.database, table_name);  // prefix database name
+  return fmt::format("{}.{}"sv, settings.database, table_name);  // prefix database name
 }
 
 bool is_full(Settings const &settings, size_t rows) {
@@ -67,7 +66,7 @@ void detail::Common::create_table(
       "{}, "           // session_id
       "intHash64({})"  // seqno
       "{}"             // extra_index_fields
-      ")"_cf,
+      ")"sv,
       table_name,
       gateway_,
       session_id_,

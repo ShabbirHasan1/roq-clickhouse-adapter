@@ -6,8 +6,6 @@
 
 using namespace std::literals;
 
-using namespace fmt::literals;
-
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -19,9 +17,9 @@ ExternalLatency::ExternalLatency() : stream_id_{"stream_id"sv}, account_{"accoun
 
 std::string ExternalLatency::get_fields() const {
   return fmt::format(
-      "{}, "    // stream_id
-      "{}, "    // account
-      "{}"_cf,  // latency
+      "{}, "   // stream_id
+      "{}, "   // account
+      "{}"sv,  // latency
       stream_id_,
       account_,
       latency_);

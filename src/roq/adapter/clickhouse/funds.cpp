@@ -6,8 +6,6 @@
 
 using namespace std::literals;
 
-using namespace fmt::literals;
-
 namespace roq {
 namespace adapter {
 namespace clickhouse {
@@ -22,15 +20,15 @@ Funds::Funds()
 
 std::string Funds::get_fields() const {
   return fmt::format(
-      "{}, "    // stream_id
-      "{}, "    // account
-      "{}, "    // currency
-      "{}, "    // balance
-      "{}, "    // hold
-      "{}, "    // external_account
-      "{}, "    // update_type
-      "{}, "    // exchange_time_utc
-      "{}"_cf,  // sending_time_utc
+      "{}, "   // stream_id
+      "{}, "   // account
+      "{}, "   // currency
+      "{}, "   // balance
+      "{}, "   // hold
+      "{}, "   // external_account
+      "{}, "   // update_type
+      "{}, "   // exchange_time_utc
+      "{}"sv,  // sending_time_utc
       stream_id_,
       account_,
       currency_,
