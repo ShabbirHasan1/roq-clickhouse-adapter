@@ -45,7 +45,7 @@ struct Order final {
   Column<std::chrono::nanoseconds> update_time_utc_;
   Column<std::string_view, true> external_account_;
   Column<std::string_view> external_order_id_;
-  Column<OrderStatus, true> status_;
+  Column<OrderStatus, true> order_status_;
   Column<double> quantity_;
   Column<double> price_;
   Column<double> stop_price_;

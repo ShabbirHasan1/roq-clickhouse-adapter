@@ -14,9 +14,10 @@ namespace clickhouse {
 
 OrderAck::OrderAck()
     : stream_id_{"stream_id"}, account_{"account"}, order_id_{"order_id"}, exchange_{"exchange"}, symbol_{"symbol"},
-      side_{"side"}, type_{"type"}, origin_{"origin"}, status_{"status"}, error_{"error"}, text_{"text"},
-      request_id_{"request_id"}, external_account_{"external_account"}, external_order_id_{"external_order_id"},
-      routing_id_{"routing_id"}, version_{"version"}, round_trip_latency_{"round_trip_latency"} {
+      side_{"side"}, request_type_{"request_type"}, origin_{"origin"}, request_status_{"request_status"},
+      error_{"error"}, text_{"text"}, request_id_{"request_id"}, external_account_{"external_account"},
+      external_order_id_{"external_order_id"}, routing_id_{"routing_id"}, version_{"version"},
+      round_trip_latency_{"round_trip_latency"} {
 }
 
 std::string OrderAck::get_fields() const {
@@ -44,9 +45,9 @@ std::string OrderAck::get_fields() const {
       exchange_,
       symbol_,
       side_,
-      type_,
+      request_type_,
       origin_,
-      status_,
+      request_status_,
       error_,
       text_,
       request_id_,
@@ -64,9 +65,9 @@ size_t OrderAck::operator()(roq::OrderAck const &order_update) {
   exchange_.append(order_update.exchange);
   symbol_.append(order_update.symbol);
   side_.append(order_update.side);
-  type_.append(order_update.type);
+  request_type_.append(order_update.request_type);
   origin_.append(order_update.origin);
-  status_.append(order_update.status);
+  request_status_.append(order_update.request_status);
   error_.append(order_update.error);
   text_.append(order_update.text);
   request_id_.append(order_update.request_id);
@@ -85,9 +86,9 @@ void OrderAck::append(third_party::clickhouse::Block &block) {
   exchange_.append(block);
   symbol_.append(block);
   side_.append(block);
-  type_.append(block);
+  request_type_.append(block);
   origin_.append(block);
-  status_.append(block);
+  request_status_.append(block);
   error_.append(block);
   text_.append(block);
   request_id_.append(block);
@@ -105,9 +106,9 @@ void OrderAck::clear() {
   exchange_.clear();
   symbol_.clear();
   side_.clear();
-  type_.clear();
+  request_type_.clear();
   origin_.clear();
-  status_.clear();
+  request_status_.clear();
   error_.clear();
   text_.clear();
   request_id_.clear();

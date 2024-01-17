@@ -17,7 +17,7 @@ Order::Order()
       side_{"side"}, position_effect_{"position_effect"}, max_show_quantity_{"max_show_quantity"},
       order_type_{"order_type"}, time_in_force_{"time_in_force"}, execution_instructions_{"execution_instructions"},
       create_time_utc_{"create_time_utc"}, update_time_utc_{"update_time_utc"}, external_account_{"external_account"},
-      external_order_id_{"external_order_id"}, status_{"status"}, quantity_{"quantity"}, price_{"price"},
+      external_order_id_{"external_order_id"}, order_status_{"order_status"}, quantity_{"quantity"}, price_{"price"},
       stop_price_{"stop_price"}, remaining_quantity_{"remaining_quantity"}, traded_quantity_{"traded_quantity"},
       average_traded_price_{"average_traded_price"}, last_traded_quantity_{"last_traded_quantity"},
       last_traded_price_{"last_traded_price"}, last_liquidity_{"last_liquidity"}, routing_id_{"routing_id"},
@@ -74,7 +74,7 @@ std::string Order::get_fields() const {
       update_time_utc_,
       external_account_,
       external_order_id_,
-      status_,
+      order_status_,
       quantity_,
       price_,
       stop_price_,
@@ -108,7 +108,7 @@ size_t Order::operator()(roq::OrderUpdate const &order_update) {
   update_time_utc_.append(order_update.update_time_utc);
   external_account_.append(order_update.external_account);
   external_order_id_.append(order_update.external_order_id);
-  status_.append(order_update.status);
+  order_status_.append(order_update.order_status);
   quantity_.append(order_update.quantity);
   price_.append(order_update.price);
   stop_price_.append(order_update.stop_price);
@@ -143,7 +143,7 @@ void Order::append(third_party::clickhouse::Block &block) {
   update_time_utc_.append(block);
   external_account_.append(block);
   external_order_id_.append(block);
-  status_.append(block);
+  order_status_.append(block);
   quantity_.append(block);
   price_.append(block);
   stop_price_.append(block);
@@ -177,7 +177,7 @@ void Order::clear() {
   update_time_utc_.clear();
   external_account_.clear();
   external_order_id_.clear();
-  status_.clear();
+  order_status_.clear();
   quantity_.clear();
   price_.clear();
   stop_price_.clear();

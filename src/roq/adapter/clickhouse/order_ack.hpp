@@ -36,9 +36,9 @@ struct OrderAck final {
   Column<std::string_view, true> exchange_;
   Column<std::string_view, true> symbol_;
   Column<Side, true> side_;
-  Column<RequestType, true> type_;
+  Column<RequestType, true> request_type_;
   Column<Origin, true> origin_;
-  Column<RequestStatus, true> status_;
+  Column<RequestStatus, true> request_status_;
   Column<Error, true> error_;
   Column<std::string_view> text_;
   Column<std::string_view> request_id_;
