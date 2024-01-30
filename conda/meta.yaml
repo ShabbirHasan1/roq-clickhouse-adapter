@@ -24,12 +24,11 @@ requirements:
     - make
   host:
     - abseil-cpp
-    - catch2  # [linux]
+    - catch2
     - fmt
     - roq-adapter
     - roq-client
     - roq-flags
-    - roq-oss-catch2  # [osx]
     - roq-oss-clickhouse-cpp
     - roq-oss-magic_enum
 
