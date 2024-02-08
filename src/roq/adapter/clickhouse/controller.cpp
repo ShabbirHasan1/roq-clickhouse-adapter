@@ -85,7 +85,7 @@ void Controller::dispatch() {
 bool Controller::operator()(Category category, adapter::Add const &add) {
   log::info(R"(Adding session_id="{}")"sv, add.session_id);
   auto &processed = processed_[category];
-  auto &key = add.session_id;
+  auto key = static_cast<UUID::value_type>(add.session_id);
   if (processed.find(key) != std::end(processed)) {
     return true;
   } else {
@@ -98,7 +98,7 @@ bool Controller::operator()(Category category, adapter::Add const &add) {
 
 void Controller::operator()(Category category, adapter::Remove const &remove) {
   auto &feeds = feeds_[category];
-  auto &key = remove.session_id;
+  auto key = static_cast<UUID::value_type>(remove.session_id);
   auto iter = feeds.find(key);
   if (iter != std::end(feeds)) {
     log::info(R"(Removing session_id="{}")"sv, remove.session_id);
@@ -190,7 +190,7 @@ bool Controller::operator()(Category category, Event<roq::CustomMetricsUpdate> c
 template <typename T, typename U>
 bool Controller::dispatch(Category category, Event<T> const &event, Table<U> &table) {
   auto &feeds = feeds_[category];
-  auto &key = event.message_info.source_session_id;
+  auto key = static_cast<UUID::value_type>(event.message_info.source_session_id);
   auto iter = feeds.find(key);
   if (iter != std::end(feeds))
     return table(event, (*iter).second, ++counter_);

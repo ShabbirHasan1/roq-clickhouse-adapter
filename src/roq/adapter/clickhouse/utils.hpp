@@ -16,8 +16,7 @@ inline auto to_uint128(const UUID &value) {
 }
 
 inline UUID from_uint128(third_party::clickhouse::UInt128 const &value) {
-  auto tmp = absl::MakeUint128(value.first, value.second);
-  return UUID{tmp};
+  return UUID{value.first, value.second};
 }
 
 }  // namespace clickhouse

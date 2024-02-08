@@ -96,8 +96,8 @@ struct Controller final : public adapter::Handler {
   std::unique_ptr<adapter::Dispatcher> const dispatcher_;
   Settings const &settings_;
   // event-logs
-  absl::flat_hash_map<Category, absl::flat_hash_set<UUID>> processed_;
-  absl::flat_hash_map<Category, absl::flat_hash_map<UUID, std::string>> feeds_;
+  absl::flat_hash_map<Category, absl::flat_hash_set<UUID::value_type>> processed_;
+  absl::flat_hash_map<Category, absl::flat_hash_map<UUID::value_type, std::string>> feeds_;
   // state
   third_party::clickhouse::Client client_;
   size_t counter_ = {};
