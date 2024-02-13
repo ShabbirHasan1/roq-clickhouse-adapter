@@ -23,7 +23,7 @@ requirements:
     - cmake
     - make
   host:
-    - libabseil
+    - abseil-cpp
     - catch2
     - fmt
     - roq-adapter
