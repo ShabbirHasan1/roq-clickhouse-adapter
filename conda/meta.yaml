@@ -23,9 +23,9 @@ requirements:
     - cmake
     - make
   host:
-    - libabseil
     - catch2
     - fmt
+    - libabseil
     - roq-adapter
     - roq-client
     - roq-flags
