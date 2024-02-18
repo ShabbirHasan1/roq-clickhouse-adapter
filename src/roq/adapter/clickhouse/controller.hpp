@@ -2,14 +2,13 @@
 
 #pragma once
 
-#include <absl/container/flat_hash_map.h>
-#include <absl/container/flat_hash_set.h>
-
 #include <string>
 
 #include "roq/adapter.hpp"
 
 #include "roq/third_party/clickhouse/client.hpp"
+
+#include "roq/utils/container.hpp"
 
 #include "roq/adapter/clickhouse/settings.hpp"
 
@@ -96,8 +95,8 @@ struct Controller final : public adapter::Handler {
   std::unique_ptr<adapter::Dispatcher> const dispatcher_;
   Settings const &settings_;
   // event-logs
-  absl::flat_hash_map<Category, absl::flat_hash_set<UUID::value_type>> processed_;
-  absl::flat_hash_map<Category, absl::flat_hash_map<UUID::value_type, std::string>> feeds_;
+  utils::unordered_map<Category, utils::unordered_set<UUID::value_type>> processed_;
+  utils::unordered_map<Category, utils::unordered_map<UUID::value_type, std::string>> feeds_;
   // state
   third_party::clickhouse::Client client_;
   size_t counter_ = {};

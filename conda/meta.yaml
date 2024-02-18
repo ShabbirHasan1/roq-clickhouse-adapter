@@ -31,6 +31,7 @@ requirements:
     - roq-flags
     - roq-oss-clickhouse-cpp
     - roq-oss-magic_enum
+    - roq-oss-unordered_dense
 
 about:
   home: https://roq-trading.com

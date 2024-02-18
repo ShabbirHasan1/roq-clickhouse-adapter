@@ -32,6 +32,7 @@ find_package(roq-api REQUIRED)
 find_package(roq-flags REQUIRED)
 find_package(roq-io REQUIRED)
 find_package(roq-logging REQUIRED)
+find_package(unordered_dense REQUIRED)
 
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   include(CTest)
